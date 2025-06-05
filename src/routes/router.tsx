@@ -11,9 +11,9 @@ import ResetPassword from "../features/auth/ResetPassword";
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-        <Route index path="/login" element={<LoginPage />}/>
-        <Route index path="/forgot-password" element={<ForgetPassword />}/>
-        <Route index path="/reset-password" element={<ResetPassword />}/>
+        <Route path="/" element={<LoginPage />}/>
+        <Route path="/forgot-password" element={<ForgetPassword />}/>
+        <Route path="/reset-password" element={<ResetPassword />}/>
         <Route path="/register" element={<RegisterPage />}/>
         </>
     )
