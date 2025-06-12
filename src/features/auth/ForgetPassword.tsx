@@ -6,7 +6,7 @@ import { Heading } from "../../shared/components/UI/Typography";
 import sms from "../../assets/sms.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import animationData from "../../assets/passwordAnimation.json";
+import animationData from "../../assets/password.json";
 
 export default function ForgetPassword() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function ForgetPassword() {
                 </div>
                 <form className="mt-6 space-y-4">
                     <AuthFormField type="email" placeholder="Enter Your Email" icon={sms} />
-                    <Button className="w-full flex items-center justify-center gap-2" type="submit" onClick={() => {
+                    <Button className="w-full flex items-center justify-center gap-2 text-white" type="submit" onClick={() => {
                         navigate('/reset-password');}
                     }>
                         <span>Send New Password</span>

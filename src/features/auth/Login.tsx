@@ -10,7 +10,7 @@ import microsoft from "../../assets/microsoft.svg";
 import google from "../../assets/google.svg";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import animationData from "../../assets/loginAnimation.json";
+import animationData from "../../assets/login.json";
 
 export default function LoginPage() {
     return (
@@ -30,7 +30,7 @@ export default function LoginPage() {
                     <div className="text-right text-sm text-blue-800">
                         <Link to="/forgot-password">Forget Password</Link>
                     </div>
-                    <Button className="w-full flex items-center justify-center gap-2" type="submit">
+                    <Button className="w-full flex items-center justify-center gap-2 text-white" type="submit">
                         <span>Login</span>
                         <img src={login} alt="login icon" className="w-5 h-5" />
                     </Button>

@@ -6,7 +6,7 @@ import { Heading } from "../../shared/components/UI/Typography";
 import lock from "../../assets/lock.svg";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import animationData from "../../assets/passwordAnimation.json";
+import animationData from "../../assets/password.json";
 
 export default function ResetPassword() {
     return (
@@ -22,7 +22,7 @@ export default function ResetPassword() {
                 <form className="mt-6 space-y-4">
                     <AuthFormField type="password" placeholder="Enter Your Password" icon={lock} />
                     <AuthFormField type="password" placeholder="Confirm Password" icon={lock} />
-                    <Button className="w-full flex items-center justify-center gap-2" type="submit">
+                    <Button className="w-full flex items-center justify-center gap-2 text-white" type="submit">
                         <span>Update Password</span>
                     </Button>
                 </form>

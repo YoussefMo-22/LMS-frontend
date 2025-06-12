@@ -11,7 +11,7 @@ import microsoft from "../../assets/microsoft.svg";
 import google from "../../assets/google.svg";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import animationData from "../../assets/loginAnimation.json";
+import animationData from "../../assets/login.json";
 import RoleSelect from "./components/RoleSelect";
 import { useState } from "react";
 
@@ -23,7 +23,7 @@ export default function RegisterPage() {
                 <div className="flex flex-col space-y-2">
                     <div className="flex justify-between items-center">
                         <Heading>Sign Up</Heading>
-                        <p>Already have an account?<Link className="font-bold text-primary-400" to={'/login'}>Login</Link></p>
+                        <p>Already have an account?<Link className="font-bold text-primary-400" to={'/'}>Login</Link></p>
                     </div>
                     <SubHeading>Join LevelUp Today!</SubHeading>
                     <SubText>Create your account and start learning.</SubText>
@@ -34,7 +34,7 @@ export default function RegisterPage() {
                     <AuthFormField type="email" placeholder="Enter Your Email" icon={sms} />
                     <AuthFormField type="password" placeholder="Enter Your Password" icon={lock} />
                     <AuthFormField type="password" placeholder="Confirm Password" icon={lock} />
-                    <Button className="w-full flex items-center justify-center gap-2" type="submit">
+                    <Button className="w-full flex items-center justify-center gap-2 text-white" type="submit">
                         <span>Sign Up</span>
                         <img src={signup} alt="login icon" className="w-5 h-5" />
                     </Button>
