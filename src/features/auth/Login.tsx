@@ -1,6 +1,5 @@
 import AuthLayout from "./components/AuthLayout";
 import AuthFormField from "./components/AuthFormField";
-import Button from "../../shared/components/UI/Button";
 import { Heading, SubHeading, SubText } from "../../shared/components/UI/Typography";
 // import AuthFooterLink from "./components/AuthFooterLink";
 import sms from "../../assets/sms.svg";
@@ -11,11 +10,12 @@ import google from "../../assets/google.svg";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import animationData from "../../assets/login.json";
+import ButtonUI from "../../shared/components/UI/Button";
 
 export default function LoginPage() {
     return (
         <AuthLayout slogan="Level up your skills. Learn anytime, anywhere" imageVector={<Lottie animationData={animationData} loop={true}/>}>
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-md mx-auto px-4">
                 <div className="flex flex-col space-y-6">
                     <div className="flex justify-between items-center">
                         <Heading>Log In</Heading>
@@ -30,10 +30,10 @@ export default function LoginPage() {
                     <div className="text-right text-sm text-blue-800">
                         <Link to="/forgot-password">Forget Password</Link>
                     </div>
-                    <Button className="w-full flex items-center justify-center gap-2 text-white" type="submit">
+                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-white" type="submit">
                         <span>Login</span>
                         <img src={login} alt="login icon" className="w-5 h-5" />
-                    </Button>
+                    </ButtonUI>
                 </form>
                 <div className="flex items-center my-6">
                     <hr className="flex-grow border-t border-gray-300" />
@@ -42,14 +42,14 @@ export default function LoginPage() {
                 </div>
 
                 <div className="mt-6 flex flex-col space-y-2">
-                    <Button className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
+                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
                         <img src={google} alt="login icon" className="w-5 h-5" />
                         <span>Log in with Google</span>
-                    </Button>
-                    <Button className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
+                    </ButtonUI>
+                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
                         <img src={microsoft} alt="login icon" className="w-5 h-5" />
                         <span>Log in with Microsoft</span>
-                    </Button>
+                    </ButtonUI>
                 </div>
                 {/* <AuthFooterLink text="Don't have an account?" to="/signup" linkText="Sign Up" /> */}
             </div>

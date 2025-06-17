@@ -10,14 +10,19 @@ import animationData from "../../assets/password.json";
 
 export default function ResetPassword() {
     return (
-        <AuthLayout imageVector={<Lottie animationData={animationData} loop={false}/>}>
-            <div className="w-full max-w-md">
+        <AuthLayout imageVector={<Lottie animationData={animationData} loop={false} />}>
+            <div className="w-full max-w-md mx-auto px-4">
                 <div className="flex flex-col space-y-6">
                     <div className="flex flex-col justify-between">
                         <Heading>Reset Your Password</Heading>
-                        <p>Already have an account?<Link className="font-bold text-primary-400" to={'/login'}>Login</Link></p>
+                        <p>
+                            Already have an account?
+                            <Link className="font-bold text-primary-400 ml-1" to={'/login'}>Login</Link>
+                        </p>
                     </div>
-                    <p className="text-primary-400">Please enter a new password to access your account</p>
+                    <p className="text-primary-400">
+                        Please enter a new password to access your account.
+                    </p>
                 </div>
                 <form className="mt-6 space-y-4">
                     <AuthFormField type="password" placeholder="Enter Your Password" icon={lock} />
@@ -30,3 +35,4 @@ export default function ResetPassword() {
         </AuthLayout>
     );
 }
+

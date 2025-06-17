@@ -1,5 +1,5 @@
 export const Heading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-[40px] font-bold text-primary-400">{children}</h2>
+  <h2 className="text-2xl md:text-4xl  font-bold text-primary-400">{children}</h2>
 );
 
 export const SubHeading = ({ children }: { children: React.ReactNode }) => (
