@@ -40,7 +40,7 @@ function CoursesSection() {
 
 
         {/* Swiper for enrolled courses on small screens */}
-        <div className="md:hidden">
+        <div className="md:hidden mt-6">
           <Swiper
             spaceBetween={20}
             slidesPerView={1.1}

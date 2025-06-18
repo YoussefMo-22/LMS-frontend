@@ -9,6 +9,7 @@ import ForgetPassword from "../features/auth/ForgetPassword";
 import ResetPassword from "../features/auth/ResetPassword";
 import RootLayout from "../app/RootLayout";
 import LandingPage from "../features/landing/LandingPage";
+import HomePage from "../features/Home/HomePage";
 
 const router =
 
@@ -21,6 +22,10 @@ const router =
                     path: "/",
                     element: <LandingPage />,
                 },
+                {
+                    path: "/home",
+                    element: <HomePage />,
+                }
             ]
         },
         {

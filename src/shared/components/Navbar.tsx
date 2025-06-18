@@ -29,7 +29,7 @@ export default function Navbar() {
         >
           <ul className="flex flex-col lg:flex-row items-center text-dark-500 lg:space-x-6 space-y-4 lg:space-y-0 px-4 py-4 lg:p-0">
             <li>
-              <NavLink to="/" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>
+              <NavLink to="/home" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>
                 Home Page
               </NavLink>
             </li>
