@@ -10,6 +10,7 @@ import ResetPassword from "../features/auth/ResetPassword";
 import RootLayout from "../app/RootLayout";
 import LandingPage from "../features/landing/LandingPage";
 import HomePage from "../features/Home/HomePage";
+import CourseDetails from "../features/courses/courseDetails";
 
 const router =
 
@@ -25,6 +26,10 @@ const router =
                 {
                     path: "/home",
                     element: <HomePage />,
+                },
+                {
+                    path: "course/1",
+                    element: <CourseDetails />,
                 }
             ]
         },

@@ -1,5 +1,5 @@
-import { ArrowRight, Search } from "lucide-react";
-import InputUI from "../../shared/components/UI/Input";
+import { ArrowRight } from "lucide-react";
+// import InputUI from "../../shared/components/UI/Input";
 import ButtonUI from "../../shared/components/UI/Button";
 import EnrolledCourseCard from "../../shared/components/EnrolledCourseCard";
 import { Link } from "react-router-dom";
@@ -12,13 +12,13 @@ function HomePage() {
         <div>
             <div className="container mx-auto px-4 py-8">
                 {/* Search Input */}
-                <div>
+                {/* <div>
                     <InputUI
                         type={"search"}
                         placeholder={"Search for courses, topics, instructors…"}
                         icon={<Search color="#1e3a8a" />}
                     />
-                </div>
+                </div> */}
 
                 {/* Welcome Section */}
                 <div className="mt-8 py-10 px-6 bg-primary-400 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

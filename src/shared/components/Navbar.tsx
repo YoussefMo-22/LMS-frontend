@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -9,9 +9,11 @@ export default function Navbar() {
     <header className="bg-white container mx-auto">
       <nav className="container mx-auto p-4 flex items-center justify-between relative">
         {/* Logo */}
-        <h1 className="text-3xl font-bold logo-bold">
-          Level Up
-        </h1>
+        <Link to="/">
+          <h1 className="text-3xl font-bold logo-bold">
+            Level Up
+          </h1>
+        </Link>
 
         {/* Mobile Toggle Button */}
         <button
@@ -53,13 +55,13 @@ export default function Navbar() {
           {/* Auth Buttons */}
           <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4 px-4 pb-4 lg:p-0">
             <NavLink
-              to="/login"
+              to="/register"
               className="border border-primary-500 text-primary-500 px-10 py-2 rounded-2xl hover:bg-primary-100 transition"
             >
               Join
             </NavLink>
             <NavLink
-              to="/register"
+              to="/login"
               className="bg-primary-500 text-white px-10 py-2 rounded-2xl hover:bg-primary-600 transition"
             >
               Login
