@@ -1,7 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import course from '../../assets/course.png';
 import ButtonUI from './UI/Button';
 
 function QuizCard() {
+      const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate(`/quiz/1`); // dynamically go to course
+    };
   return (
     <div className="flex items-center justify-between bg-white shadow-md rounded-lg overflow-hidden p-4 gap-4">
       
@@ -18,7 +24,7 @@ function QuizCard() {
 
       {/* Right - Start Button */}
       <div>
-        <ButtonUI className="bg-primary-400 text-white px-9 py-2 hover:bg-primary-500 transition rounded-md">
+        <ButtonUI onClick={handleContinue} className="bg-primary-400 text-white px-9 py-2 hover:bg-primary-500 transition rounded-md">
           Start
         </ButtonUI>
       </div>

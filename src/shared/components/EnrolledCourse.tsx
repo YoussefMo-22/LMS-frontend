@@ -3,9 +3,15 @@ import profile from '../../assets/profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import ButtonUI from './UI/Button';
+import { useNavigate } from 'react-router-dom';
 
 function EnrolledCourse() {
     const progress = 65; // example progress percentage
+        const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate(`/course/lesson/1`); // dynamically go to course
+    };
 
     return (
         <div className="bg-white shadow-md p-5 rounded-lg overflow-hidden flex flex-col md:flex-row gap-5">
@@ -50,7 +56,7 @@ function EnrolledCourse() {
                 </div>
 
                 {/* Continue Button */}
-                <ButtonUI className="w-full bg-transparent border-2 border-primary-400 text-primary-400 hover:bg-primary-100">
+                <ButtonUI onClick={handleContinue} className="w-full bg-transparent border-2 border-primary-400 text-primary-400 hover:bg-primary-100">
                     Continue Course
                 </ButtonUI>
             </div>

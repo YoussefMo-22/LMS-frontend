@@ -10,7 +10,10 @@ import ResetPassword from "../features/auth/ResetPassword";
 import RootLayout from "../app/RootLayout";
 import LandingPage from "../features/landing/LandingPage";
 import HomePage from "../features/Home/HomePage";
-import CourseDetails from "../features/courses/courseDetails";
+import CourseDetails from "../features/courses/pages/CourseDetails";
+import CourseVideoPage from "../features/courses/pages/CourseVideoPage";
+import QuizPage from "../features/courses/pages/QuizPage";
+import Checkout from "../features/courses/pages/Checkout";
 
 const router =
 
@@ -30,6 +33,18 @@ const router =
                 {
                     path: "course/1",
                     element: <CourseDetails />,
+                },
+                {
+                    path: "course/lesson/1",
+                    element: <CourseVideoPage />,
+                },
+                {
+                    path: "quiz/1",
+                    element: <QuizPage />,
+                },
+                {
+                    path: "checkout",
+                    element: <Checkout />,
                 }
             ]
         },

@@ -12,19 +12,19 @@ function EnrollCourseCard() {
                 <h3 className="text-xl font-bold text-primary-400 line-clamp-2">
                     The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ...
                 </h3>
-<div className="flex gap-2 justify-between items-center">
-                <div className="flex items-center gap-3 mt-2">
-                    <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" />
-                    <p className="text-lg  font-medium">Dr. Angela Yu</p>
-                </div>
-                <div className="flex items-center gap-1">
+                <div className="flex gap-2 justify-between items-center">
+                    <div className="flex items-center gap-3 mt-2">
+                        <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" />
+                        <p className="text-lg  font-medium">Dr. Angela Yu</p>
+                    </div>
+                    <div className="flex items-center gap-1">
                         <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
                         <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
                         <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
                         <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
                         <FontAwesomeIcon icon={faStar} className="text-gray-300" />
                     </div>
-                    </div>
+                </div>
                 <hr />
 
                 <ButtonUI className="w-full mt-auto text-primary-400 bg-transparent border-2 border-primary-400">Enroll Course</ButtonUI>

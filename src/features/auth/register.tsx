@@ -90,10 +90,10 @@ export default function RegisterPage() {
                     <AuthFormField type="email" placeholder="Enter Your Email" icon={sms} value={email} onChange={(e) => setEmail(e.target.value)} />
                     <AuthFormField type="password" placeholder="Enter Your Password" icon={lock} value={password} onChange={(e) => setPassword(e.target.value)} />
                     <AuthFormField type="password" placeholder="Confirm Password" icon={lock} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-white" type="submit" disabled={loading}>
+                    <button className="w-full bg-primary-400 rounded-lg py-2 flex items-center justify-center gap-2 text-white" type="submit" disabled={loading}>
                         <span>{loading ? "Signing Up..." : "Sign Up"}</span>
                         <img src={signup} alt="login icon" className="w-5 h-5" />
-                    </ButtonUI>
+                    </button>
                 </form>
                 <div className="flex items-center my-6">
                     <hr className="flex-grow border-t border-gray-300" />

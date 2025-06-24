@@ -11,7 +11,7 @@ const RootLayout: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {true ? <NavbarLogin user={user} /> : <Navbar />}
+      {user ? <NavbarLogin user={user} /> : <Navbar />}
       <main className="">
         <Outlet />
       </main>

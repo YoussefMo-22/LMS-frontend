@@ -1,8 +1,8 @@
-import CourseHeader from "./components/CourseHeader";
-import CourseInstructor from "./components/CourseInstructor";
-import CourseContentAccordion from "./components/CourseContentAccordion";
-import CourseCheckout from "./components/CourseCheckout";
-import YouMightAlsoLike from "./components/YouMightAlsoLike";
+import CourseHeader from "../components/CourseHeader";
+import CourseInstructor from "../components/CourseInstructor";
+import CourseContentAccordion from "../components/CourseContentAccordion";
+import CourseCheckout from "../components/CourseCheckout";
+import YouMightAlsoLike from "../components/YouMightAlsoLike";
 
 export default function CourseDetails() {
   return (

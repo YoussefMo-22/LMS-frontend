@@ -3,8 +3,14 @@ import profile from '../../assets/profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faStar } from '@fortawesome/free-solid-svg-icons';
 import ButtonUI from './UI/Button';
+import { useNavigate } from 'react-router-dom';
 
 function CourseCard() {
+    const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate(`/course/1`); // dynamically go to course
+    };
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col gap-4">
             <img src={course} alt="course" className="w-full h-52 object-cover " />
@@ -31,7 +37,7 @@ function CourseCard() {
                     </p>
                 </div>
 
-                <ButtonUI className="w-full mt-auto text-white"><span><FontAwesomeIcon icon={faCartShopping} className="mr-2" /></span>Add To Cart</ButtonUI>
+                <ButtonUI onClick={handleContinue} className="w-full mt-auto text-white"><span><FontAwesomeIcon icon={faCartShopping} className="mr-2" /></span>Add To Cart</ButtonUI>
             </div>
         </div>
     );
