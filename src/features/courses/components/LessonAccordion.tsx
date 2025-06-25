@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import mark from "../../../assets/mark.svg"; // Assuming you have a mark icon
+import mark from "../../../assets/mark.svg";
 
 const data = [
   {

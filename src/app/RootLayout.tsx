@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../shared/store";
 
 const RootLayout: React.FC = () => {
-  const user = useSelector((state: RootState) => state.auth.user) || JSON.parse(localStorage.getItem("user") || "null");
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <div className="flex flex-col min-h-screen">
-      {user ? <NavbarLogin user={user} /> : <Navbar />}
-      <main className="">
+      {true ? <NavbarLogin user={user} /> : <Navbar />}
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />

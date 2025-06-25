@@ -1,4 +1,5 @@
-import { CheckCircle, Circle } from "lucide-react";
+import { Circle } from "lucide-react";
+import mark from "../../../assets/mark.svg";
 
 interface Props {
   question: string;
@@ -28,7 +29,7 @@ export default function QuizQuestionBox({
             }`}
           >
             {selectedAnswer === i ? (
-              <CheckCircle size={20} className="text-primary-400" />
+              <img src={mark} className="w-5 h-5" alt="" />
             ) : (
               <Circle size={20} className="text-gray-400" />
             )}

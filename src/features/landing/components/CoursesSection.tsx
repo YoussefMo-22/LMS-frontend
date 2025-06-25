@@ -24,7 +24,14 @@ function CoursesSection() {
           >
             {[1, 2, 3].map((_, idx) => (
               <SwiperSlide key={idx}>
-                <CourseCard />
+                <CourseCard
+                  id={idx + 1}
+                  title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
+                  instructor="Dr. Angela Yu"
+                  price={499.99}
+                  originalPrice={599.99}
+                  rating={4}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -32,9 +39,31 @@ function CoursesSection() {
 
         {/* Grid layout for md+ */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
+          <CourseCard
+            id={1}
+            title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
+            instructor="Dr. Angela Yu"
+            price={499.99}
+            originalPrice={599.99}
+            rating={4}
+          />
+          <CourseCard
+            id={1}
+            title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
+            instructor="Dr. Angela Yu"
+            price={499.99}
+            originalPrice={599.99}
+            rating={4}
+          />
+          <CourseCard
+            id={1}
+            title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
+            instructor="Dr. Angela Yu"
+            price={499.99}
+            originalPrice={599.99}
+            rating={4}
+          />
+
         </div>
 
 

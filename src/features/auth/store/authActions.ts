@@ -1,45 +1,61 @@
-import { registerStart, registerSuccess, registerFailure } from './authSlice';
-import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-} from './authSlice';
-import { axiosInstance } from '../../../api/axiosInstance';
+// features/auth/authActions.ts
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { axiosInstance } from "../../../api/axiosInstance";
 
-
-export const registerUser = (formData: { name: string; email: string; password: string; role: string }) => {
-  return async (dispatch: any) => {
-    dispatch(registerStart());
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async (formData: { name: string; email: string; password: string; role: string }, thunkAPI) => {
     try {
       const response = await axiosInstance.post('/users/signup', formData);
       const { token, data } = response.data;
 
-      // Save token to localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      dispatch(registerSuccess({ token, user: data.user }));
+      return { token, user: data.user };
     } catch (error: any) {
-      const errorMsg = error.response?.data?.message || "Registration failed";
-      dispatch(registerFailure(errorMsg));
+      return thunkAPI.rejectWithValue(error.response?.data?.message || "Registration failed");
     }
-  };
-};
+  }
+);
 
-export const loginUser = (credentials: { email: string; password: string }) => {
-  return async (dispatch: any) => {
-    dispatch(loginStart());
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async (credentials: { email: string; password: string }, thunkAPI) => {
     try {
       const response = await axiosInstance.post('/users/login', credentials);
       const { token, data } = response.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-      dispatch(loginSuccess({ token, user: data.user }));
+      return { token, user: data.user };
     } catch (error: any) {
-      const errorMsg = error.response?.data?.message || 'Login failed';
-      dispatch(loginFailure(errorMsg));
+      return thunkAPI.rejectWithValue(error.response?.data?.message || "Login failed");
     }
-  };
-};
+  }
+);
+
+export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      await axiosInstance.get("/users/logout", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      return;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Logout failed"
+      );
+    }
+  }
+);

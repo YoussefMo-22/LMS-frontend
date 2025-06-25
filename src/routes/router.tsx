@@ -14,6 +14,9 @@ import CourseDetails from "../features/courses/pages/CourseDetails";
 import CourseVideoPage from "../features/courses/pages/CourseVideoPage";
 import QuizPage from "../features/courses/pages/QuizPage";
 import Checkout from "../features/courses/pages/Checkout";
+import CourseLivePage from "../features/courses/pages/CourseLivePage";
+import Courses from "../features/courses/pages/Courses";
+import SearchPage from "../shared/components/SearchPage";
 
 const router =
 
@@ -45,6 +48,18 @@ const router =
                 {
                     path: "checkout",
                     element: <Checkout />,
+                },
+                {
+                    path: "live",
+                    element: <CourseLivePage />,
+                },
+                {
+                    path: "courses",
+                    element: <Courses />,
+                },
+                {
+                    path: "search",
+                    element: <SearchPage />,
                 }
             ]
         },
