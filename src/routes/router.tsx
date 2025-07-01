@@ -1,84 +1,76 @@
-// import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-// // import RootLayout from "../app/RootLayout";
-// // import Home from "../pages/Home";
+// router.tsx
+import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-import { createBrowserRouter} from "react-router-dom";
-import LoginPage from "../features/auth/Login";
-import RegisterPage from "../features/auth/register";
-import ForgetPassword from "../features/auth/ForgetPassword";
-import ResetPassword from "../features/auth/ResetPassword";
-import RootLayout from "../app/RootLayout";
-import LandingPage from "../features/landing/LandingPage";
-import HomePage from "../features/Home/HomePage";
-import CourseDetails from "../features/courses/pages/CourseDetails";
-import CourseVideoPage from "../features/courses/pages/CourseVideoPage";
-import QuizPage from "../features/courses/pages/QuizPage";
-import Checkout from "../features/courses/pages/Checkout";
-import CourseLivePage from "../features/courses/pages/CourseLivePage";
-import Courses from "../features/courses/pages/Courses";
-import SearchPage from "../shared/components/SearchPage";
+// Lazy-loaded pages
+const RootLayout = lazy(() => import("../app/RootLayout"));
+const DashboardLayout = lazy(() => import("../features/dashboard/layout/DashboardLayout"));
 
-const router =
+const LandingPage = lazy(() => import("../features/landing/LandingPage"));
+const HomePage = lazy(() => import("../features/Home/HomePage"));
+const CourseDetails = lazy(() => import("../features/courses/pages/CourseDetails"));
+const CourseVideoPage = lazy(() => import("../features/courses/pages/CourseVideoPage"));
+const QuizPage = lazy(() => import("../features/courses/pages/QuizPage"));
+const Checkout = lazy(() => import("../features/courses/pages/Checkout"));
+const CourseLivePage = lazy(() => import("../features/courses/pages/CourseLivePage"));
+const Courses = lazy(() => import("../features/courses/pages/Courses"));
+const SearchPage = lazy(() => import("../shared/components/SearchPage"));
 
-    createBrowserRouter([
-        {
-            path: "/",
-            element: <RootLayout />,
-            children: [
-                {
-                    path: "/",
-                    element: <LandingPage />,
-                },
-                {
-                    path: "/home",
-                    element: <HomePage />,
-                },
-                {
-                    path: "course/1",
-                    element: <CourseDetails />,
-                },
-                {
-                    path: "course/lesson/1",
-                    element: <CourseVideoPage />,
-                },
-                {
-                    path: "quiz/1",
-                    element: <QuizPage />,
-                },
-                {
-                    path: "checkout",
-                    element: <Checkout />,
-                },
-                {
-                    path: "live",
-                    element: <CourseLivePage />,
-                },
-                {
-                    path: "courses",
-                    element: <Courses />,
-                },
-                {
-                    path: "search",
-                    element: <SearchPage />,
-                }
-            ]
-        },
-        {
-            path: "/login",
-            element: <LoginPage />,
-        },
-        {
-            path: "/forgot-password",
-            element: <ForgetPassword />,
-        },
-        {
-            path: "/reset-password",
-            element: <ResetPassword />,
-        },
-        {
-            path: "/register",
-            element: <RegisterPage />,
-        }
-        ])
+const LoginPage = lazy(() => import("../features/auth/Login"));
+const RegisterPage = lazy(() => import("../features/auth/register"));
+const ForgetPassword = lazy(() => import("../features/auth/ForgetPassword"));
+const ResetPassword = lazy(() => import("../features/auth/ResetPassword"));
 
-export default router
+// Dashboard Pages
+const Overview = lazy(() => import("../features/dashboard/pages/Overview"));
+const MyCourses = lazy(() => import("../features/dashboard/pages/MyCourses"));
+const Assignments = lazy(() => import("../features/dashboard/pages/Assignments"));
+const Messages = lazy(() => import("../features/dashboard/pages/Messages"));
+
+// Auth & Guards
+import PrivateRoute from "./PrivateRoute";
+
+const Load = (Component: React.LazyExoticComponent<any>) => (
+  <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+    <Component />
+  </Suspense>
+);
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: Load(RootLayout),
+    children: [
+      { path: "", element: Load(LandingPage) },
+      { path: "home", element: Load(HomePage) },
+      { path: "course/1", element: Load(CourseDetails) },
+      { path: "course/lesson/1", element: Load(CourseVideoPage) },
+      { path: "quiz/1", element: Load(QuizPage) },
+      { path: "checkout", element: Load(Checkout) },
+      { path: "live", element: Load(CourseLivePage) },
+      { path: "courses", element: Load(Courses) },
+      { path: "search", element: Load(SearchPage) },
+    ],
+  },
+{
+  path: "/dashboard",
+  element: <PrivateRoute />,
+  children: [
+    {
+      element: Load(DashboardLayout),
+      children: [
+        { index: true, element: Load(Overview) },
+        { path: "courses", element: Load(MyCourses) },
+        { path: "assignments", element: Load(Assignments) },
+        { path: "messages", element: Load(Messages) },
+      ],
+    },
+  ],
+},
+  { path: "/login", element: Load(LoginPage) },
+  { path: "/register", element: Load(RegisterPage) },
+  { path: "/forgot-password", element: Load(ForgetPassword) },
+  { path: "/reset-password", element: Load(ResetPassword) },
+]);
+
+export default router;
