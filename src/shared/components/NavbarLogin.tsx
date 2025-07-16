@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import cart from "../../assets/shopping-cart.svg";
 import noti from "../../assets/notification-bing.svg"
 import profile from "../../assets/profile.png";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../features/auth/store/authActions";
-import type { AppDispatch } from "../../shared/store";
 import SearchInput from "./SearchInput";
+import Cookies from "js-cookie";
+
 
 type NavbarLoginProps = {
   user: {
@@ -22,14 +21,17 @@ export default function NavbarLogin({ user }: NavbarLoginProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
 
-  const handleLogout = async () => {
-    dispatch(logoutUser()).then(() => {
-      navigate("/");
-    });
+const handleLogout = () => {
+    Cookies.remove("user");
+    Cookies.remove("token");
+
+    navigate("/");
   };
 
+  useEffect(() => {
+    console.log("User in NavbarLogin:", user);
+  }, [user]);
 
   return (
     <header className="bg-white container mx-auto">

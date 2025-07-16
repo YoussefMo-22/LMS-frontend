@@ -14,64 +14,61 @@ import animationData from "../../assets/login.json";
 import RoleSelect from "./components/RoleSelect";
 import { useState } from "react";
 import ButtonUI from "../../shared/components/UI/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "./store/authActions";
-import type { RootState, AppDispatch } from "../../shared/store";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { clearAuthStatus } from "./store/authSlice";
 import toast from "react-hot-toast";
+import { useAuth } from "./hooks/useAuth";
 
 export default function RegisterPage() {
-    const [role, setRole] = useState("");
-    const dispatch = useDispatch<AppDispatch>();
-    const { loading, error, success } = useSelector((state: RootState) => state.auth);
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (success) {
-            toast.success("Account created successfully");
-            navigate("/");
-        }
-        if (error) {
-            toast.error(error);
-        }
+      const { register, loading, error } = useAuth();
+  const navigate = useNavigate();
 
-        return () => {
-            dispatch(clearAuthStatus());
-        };
-    }, [success, error, navigate, dispatch]);
+  const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    if (!name || !email || !password || !confirmPassword || !role) {
+      toast.error("All fields are required");
+      return;
+    }
 
-        if (!name || !email || !password || !confirmPassword || !role) {
-            toast.error("All fields are required");
-            return;
-        }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email address");
+      return;
+    }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            toast.error("Invalid email address");
-            return;
-        }
+const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-        if (password.length < 6) {
-            toast.error("Password must be at least 6 characters");
-            return;
-        }
+if (!strongPasswordRegex.test(password)) {
+  toast.error(
+    "Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character."
+  );
+  return;
+}
 
-        if (password !== confirmPassword) {
-            toast.error("Passwords do not match");
-            return;
-        }
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
 
-        dispatch(registerUser({ name, email, password, role }));
-    };
+    const result = await register({ name, email, password, role });
+
+  if (result && result._id) {
+    // Success: now go to QR code step
+    navigate("/verify-account", {
+      state: {
+        userId: result._id,
+      },
+    });
+  } else {
+    toast.error(error || "Registration failed");
+  }
+  };
 
     return (
         <AuthLayout slogan="Unlock your potential with every lesson" imageVector={<Lottie animationData={animationData} loop={true} />}>

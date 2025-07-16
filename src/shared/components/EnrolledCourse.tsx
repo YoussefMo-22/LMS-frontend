@@ -17,7 +17,7 @@ function EnrolledCourse() {
         <div className="bg-white shadow-md p-5 rounded-lg overflow-hidden flex flex-col md:flex-row gap-5">
             {/* Left Side - Course Image */}
             <div className="md:w-1/3 w-full">
-                <img src={course} alt="course" className="w-full h-full object-cover rounded-md" />
+                <img src={course} alt="course" className="w-full h-full object-cover rounded-md" loading="lazy" />
             </div>
 
             {/* Right Side - Content */}
@@ -29,7 +29,7 @@ function EnrolledCourse() {
 
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3">
-                            <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" />
+                            <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
                             <p className="text-lg font-medium">Dr. Angela Yu</p>
                         </div>
                         <div className="flex items-center gap-1">

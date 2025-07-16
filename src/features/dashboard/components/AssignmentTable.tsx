@@ -1,3 +1,5 @@
+import React from 'react';
+
 const AssignmentTable = () => {
   return (
     <div className="overflow-x-auto">
@@ -30,4 +32,4 @@ const AssignmentTable = () => {
   );
 };
 
-export default AssignmentTable;
+export default React.memo(AssignmentTable);

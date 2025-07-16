@@ -18,14 +18,14 @@ function SecureSection() {
                     </p>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-8">
                         <div className="flex items-center space-x-4">
-                            <img src={book} alt="" />
+                            <img src={book} alt="Book icon" />
                             <div className='space-y-2'>
                                 <h6 className='text-primary-400 text-5xl font-bold'>6K</h6>
                                 <p>Explore a world of knowledge  6,000+ courses await you!</p>
                             </div>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <img src={like} alt="" />
+                            <img src={like} alt="Thumbs up icon" />
                             <div className='space-y-2'>
                                 <h6 className='text-primary-400 text-5xl font-bold'>9/10</h6>
                                 <p>Explore a world of knowledge  6,000+ courses await you!</p>

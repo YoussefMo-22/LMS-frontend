@@ -1,6 +1,7 @@
 import CourseCardDashboard from "./CourseCardDashboard";
 import courseImg from "../../../assets/course.png";
 import type { CourseStatus } from "../types/index";
+import React from "react";
 
 const dummyCourses = [
   {
@@ -36,4 +37,4 @@ const CourseList = () => {
   );
 };
 
-export default CourseList;
+export default React.memo(CourseList);

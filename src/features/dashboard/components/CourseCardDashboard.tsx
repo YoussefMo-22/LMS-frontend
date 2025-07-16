@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ButtonUI from "../../../shared/components/UI/Button";
 import type { Course } from "../types";
+import React from "react";
 
 const statusColors  = {
   Published: "bg-green-500",
@@ -21,7 +22,7 @@ const CourseCardDashboard = ({ course }: { course: Course }) => {
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
       <div className="relative">
-        <img src={course.image} alt={course.title} className="w-full h-40 object-cover" />
+        <img src={course.image} alt={course.title} className="w-full h-40 object-cover" loading="lazy" />
         <span
           className={`absolute top-2 right-2 px-2 py-1 text-xs rounded text-white ${statusColors[course.status]}`}
         >
@@ -40,4 +41,4 @@ const CourseCardDashboard = ({ course }: { course: Course }) => {
   );
 };
 
-export default CourseCardDashboard;
+export default React.memo(CourseCardDashboard);

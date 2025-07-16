@@ -1,6 +1,6 @@
 // features/auth/authSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser, logoutUser } from "./authActions";
+import { loginUser, registerUser, hydrateUserFromStorage } from "./authActions";
 
 interface AuthState {
   token: string | null;
@@ -10,7 +10,7 @@ interface AuthState {
   success: boolean;
 }
 
-const initialState:AuthState = {
+const initialState: AuthState = {
   token: null,
   user: null,
   loading: false,
@@ -22,9 +22,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    clearAuthStatus: (state) => {
+    clearAuth: (state) => {
+      state.token = null;
+      state.user = null;
       state.error = null;
       state.success = false;
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -46,39 +51,23 @@ const authSlice = createSlice({
     });
 
     // Register
-    builder.addCase(registerUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
     builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.loading = false;
       state.token = action.payload.token;
       state.user = action.payload.user;
       state.success = true;
     });
-    builder.addCase(registerUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = typeof action.payload === "string" ? action.payload : "An error occurred";
-      state.success = false;
-    });
 
-      // Logout
-  builder.addCase(logoutUser.pending, (state) => {
-    state.loading = true;
-    state.error = null;
-  });
-  builder.addCase(logoutUser.fulfilled, (state) => {
-    state.loading = false;
-    state.token = null;
-    state.user = null;
-    state.success = false;
-  });
-  builder.addCase(logoutUser.rejected, (state, action) => {
-    state.loading = false;
-    state.error = action.payload || "Logout failed";
-  });
+    // Hydrate
+    builder.addCase(hydrateUserFromStorage.fulfilled, (state, action) => {
+      state.token = action.payload.token;
+      state.user = action.payload.user;
+    });
+    builder.addCase(hydrateUserFromStorage.rejected, (state) => {
+      state.token = null;
+      state.user = null;
+    });
   },
 });
 
-export const { clearAuthStatus } = authSlice.actions;
+export const { clearAuth } = authSlice.actions;
 export default authSlice.reducer;

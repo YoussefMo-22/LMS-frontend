@@ -8,7 +8,7 @@ export default function InputUI({ icon, ...props }: InputProps) {
   return (
     <div className="relative">
       {typeof icon === 'string'
-        ? <img className="absolute left-3 top-2" src={icon} alt="icon" />
+        ? <img className="absolute left-3 top-2" src={icon} alt="Input icon" />
         : icon && <span className="absolute left-3 top-2">{icon}</span>
       }
       <input

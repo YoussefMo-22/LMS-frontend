@@ -14,7 +14,7 @@ function EnrolledCourseCard() {
     };
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col gap-4">
-            <img src={course} alt="course" className="w-full h-52 object-cover" />
+            <img src={course} alt="course" className="w-full h-52 object-cover" loading="lazy" />
 
             <div className="p-4 flex flex-col gap-3 h-full">
                 <h3 className="text-xl font-bold text-primary-400 line-clamp-2">
@@ -23,7 +23,7 @@ function EnrolledCourseCard() {
 
                 <div className="flex gap-2 justify-between items-center">
                     <div className="flex items-center gap-3 mt-2">
-                        <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" />
+                        <img src={profile} alt="profile" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
                         <p className="text-lg font-medium">Dr. Angela Yu</p>
                     </div>
                     <div className="flex items-center gap-1">

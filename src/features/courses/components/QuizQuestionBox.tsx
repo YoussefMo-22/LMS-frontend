@@ -29,7 +29,7 @@ export default function QuizQuestionBox({
             }`}
           >
             {selectedAnswer === i ? (
-              <img src={mark} className="w-5 h-5" alt="" />
+              <img src={mark} className="w-5 h-5" alt="Correct answer mark" />
             ) : (
               <Circle size={20} className="text-gray-400" />
             )}

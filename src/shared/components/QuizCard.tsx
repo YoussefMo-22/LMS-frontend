@@ -13,7 +13,7 @@ function QuizCard() {
       
       {/* Left - Image */}
       <div className="w-24 h-24 flex-shrink-0">
-        <img src={course} alt="Course" className="w-full h-full object-cover rounded-md" />
+        <img src={course} alt="Course" className="w-full h-full object-cover rounded-md" loading="lazy" />
       </div>
 
       {/* Middle - Titles */}

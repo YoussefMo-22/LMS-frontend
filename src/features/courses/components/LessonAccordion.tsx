@@ -30,29 +30,43 @@ export default function LessonAccordion() {
       {data.map((section, idx) => (
         <div key={idx} className="mb-2">
           <button
-            className="w-full flex justify-between items-center font-medium px-2 py-3 bg-gray-50 rounded"
+            className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors"
             onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setOpenIndex(openIndex === idx ? -1 : idx);
+              }
+            }}
+            role="button"
+            aria-expanded={openIndex === idx}
+            aria-controls={`accordion-panel-${idx}`}
+            id={`accordion-header-${idx}`}
+            tabIndex={0}
           >
-            <span>{section.title}</span>
-            <span className="text-sm text-gray-500 flex items-center gap-1">
+            <span className="font-medium text-left">{section.title}</span>
+            <span className="flex items-center gap-2 text-sm text-gray-500">
               {section.duration}
-              <ChevronDown className={`${openIndex === idx ? "rotate-180" : ""} transition`} />
+              <ChevronDown
+                className={`transition-transform duration-300 ${openIndex === idx ? "rotate-180" : ""}`}
+              />
             </span>
           </button>
+          {/* Lessons */}
           {openIndex === idx && (
-            <ul className="mt-2 space-y-2">
-              {section.items.map((item, index) => (
+            <ul
+              className="px-4 py-2 space-y-2 text-sm text-gray-700 bg-white"
+              role="region"
+              aria-labelledby={`accordion-header-${idx}`}
+              id={`accordion-panel-${idx}`}
+            >
+              {section.items.map((item, i) => (
                 <li
-                  key={index}
-                  className="flex justify-between items-center px-2 py-1 border rounded text-sm"
+                  key={i}
+                  className="flex justify-between border-b border-gray-200 pb-1"
                 >
                   <span>{item.title}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-500">{item.duration}</span>
-                    {item.completed && (
-                      <img src={mark} className="w-4 h-4" alt="" />
-                    )}
-                  </div>
+                  <span>5 min</span>
                 </li>
               ))}
             </ul>

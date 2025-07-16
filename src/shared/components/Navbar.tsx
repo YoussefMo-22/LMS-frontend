@@ -29,7 +29,7 @@ export default function Navbar() {
             isOpen ? "block" : "hidden"
           } lg:flex lg:items-center lg:space-x-6`}
         >
-          <ul className="flex flex-col lg:flex-row items-center text-dark-500 lg:space-x-6 space-y-4 lg:space-y-0 px-4 py-4 lg:p-0">
+          {/* <ul className="flex flex-col lg:flex-row items-center text-dark-500 lg:space-x-6 space-y-4 lg:space-y-0 px-4 py-4 lg:p-0">
             <li>
               <NavLink to="/home" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>
                 Home Page
@@ -50,7 +50,7 @@ export default function Navbar() {
                 Services
               </NavLink>
             </li>
-          </ul>
+          </ul> */}
 
           {/* Auth Buttons */}
           <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4 px-4 pb-4 lg:p-0">
