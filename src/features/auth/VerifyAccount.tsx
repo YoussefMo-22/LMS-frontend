@@ -35,7 +35,7 @@ export default function VerifyAccount() {
     const result = await verify2FA(userId, token!, code);
 
     if (result) {
-      toast.success("Account verified successfully");
+      toast.success("2FA token is valid");
       navigate("/home");
     } else {
       toast.error("Invalid verification code");

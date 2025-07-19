@@ -1,7 +1,9 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/instructorApi';
+import { useInstructorEarnings } from '../../courses/hooks/useEarning';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../../../shared/components/UI/LoadingSpinner';
+import { formatCurrency } from '../../../shared/utils/formatCurrency';
 
 export default function InstructorCourses() {
   const queryClient = useQueryClient();
@@ -9,6 +11,9 @@ export default function InstructorCourses() {
     queryKey: ['instructorCourses'],
     queryFn: () => api.getCourses(),
   });
+
+  const { data: earningsData } = useInstructorEarnings();
+  const totalEarnings = earningsData?.totalEarnings || 0;
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this course? This action cannot be undone.')) return;
@@ -32,6 +37,23 @@ export default function InstructorCourses() {
         >
           + New Course
         </Link>
+      </div>
+
+      {/* Earnings Summary Card */}
+      <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow p-6 mb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Total Earnings</h2>
+            <p className="text-3xl font-bold">{formatCurrency(totalEarnings)}</p>
+            <p className="text-green-100 text-sm mt-1">From all your courses</p>
+          </div>
+          <Link
+            to="/instructor/earnings"
+            className="bg-white text-green-600 px-4 py-2 rounded-lg font-semibold hover:bg-green-50 transition"
+          >
+            View Details
+          </Link>
+        </div>
       </div>
       <div className="bg-white rounded-lg shadow p-4">
         <table className="w-full text-left">
@@ -59,6 +81,12 @@ export default function InstructorCourses() {
                     className="text-blue-600 hover:underline"
                   >
                     Edit
+                  </Link>
+                  <Link
+                    to="/instructor/quizzes"
+                    className="text-green-600 hover:underline"
+                  >
+                    Manage Quizzes
                   </Link>
                   <button
                     className="text-red-600 hover:underline"

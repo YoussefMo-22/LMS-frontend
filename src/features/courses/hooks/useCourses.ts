@@ -1,15 +1,8 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '../../../api/axiosInstance';
-import type { Course, CoursesResponse } from '../types';
+import { getPublicCourses } from '../api/courseApi';
+import type { CourseFilters, CoursesResponse } from '../types';
 
-const fetchCourses = async (page: number = 1, limit: number = 12): Promise<CoursesResponse> => {
-  const response = await axiosInstance.get<CoursesResponse>('/courses/', {
-    params: { page, limit },
-  });
-  return response.data;
-};
-
-export const useCourses = (page: number = 1, limit: number = 12) => {
+export const useCourses = (filters: CourseFilters = { page: 1, limit: 12 }) => {
   const queryClient = useQueryClient();
   const {
     data,
@@ -18,8 +11,8 @@ export const useCourses = (page: number = 1, limit: number = 12) => {
     error,
     refetch,
   } = useQuery<CoursesResponse, Error>({
-    queryKey: ['courses', page, limit],
-    queryFn: () => fetchCourses(page, limit),
+    queryKey: ['courses', filters],
+    queryFn: () => getPublicCourses(filters),
     staleTime: 1000 * 60 * 5, // 5 minutes
     gcTime: 1000 * 60 * 30, // 30 minutes
   });
@@ -27,9 +20,10 @@ export const useCourses = (page: number = 1, limit: number = 12) => {
   // Prefetch next page
   const prefetchNextPage = () => {
     if (data && data.pagination && data.pagination.hasNextPage) {
+      const nextFilters = { ...filters, page: (filters.page || 1) + 1 };
       queryClient.prefetchQuery({
-        queryKey: ['courses', page + 1, limit],
-        queryFn: () => fetchCourses(page + 1, limit),
+        queryKey: ['courses', nextFilters],
+        queryFn: () => getPublicCourses(nextFilters),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       });
@@ -41,10 +35,10 @@ export const useCourses = (page: number = 1, limit: number = 12) => {
     loading,
     error: isError ? (error as Error).message : null,
     pagination: data && data.pagination ? data.pagination : {
-      currentPage: page,
+      currentPage: filters.page || 1,
       totalPages: 1,
       totalItems: 0,
-      itemsPerPage: limit,
+      itemsPerPage: filters.limit || 12,
       hasNextPage: false,
       hasPrevPage: false,
     },

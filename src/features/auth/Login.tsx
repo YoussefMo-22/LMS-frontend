@@ -1,87 +1,112 @@
-import AuthLayout from "./components/AuthLayout";
-import AuthFormField from "./components/AuthFormField";
-import { Heading, SubHeading, SubText } from "../../shared/components/UI/Typography";
-import sms from "../../assets/sms.svg";
-import lock from "../../assets/lock.svg";
-import loginIcon from "../../assets/login.svg";
-import microsoft from "../../assets/microsoft.svg";
-import google from "../../assets/google.svg";
-import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import animationData from "../../assets/login.json";
-import ButtonUI from "../../shared/components/UI/Button";
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+import ForgotPasswordForm from './components/ForgotPasswordForm';
+import { useAuth } from './context/AuthContext';
 
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuth } from "./hooks/useAuth";
+type AuthMode = 'login' | 'signup' | 'forgot-password';
 
-
-export default function LoginPage() {
-  const { login, loading, error } = useAuth();
+const Login: React.FC = () => {
+  const [mode, setMode] = useState<AuthMode>('login');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const handleAuthSuccess = () => {
+    // Navigate to dashboard or home page
+    navigate('/dashboard');
+  };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const renderAuthForm = () => {
+    switch (mode) {
+      case 'signup':
+        return (
+          <SignupForm
+            onSuccess={handleAuthSuccess}
+            onSwitchToLogin={() => setMode('login')}
+          />
+        );
+      case 'forgot-password':
+        return (
+          <ForgotPasswordForm
+            onSwitchToLogin={() => setMode('login')}
+          />
+        );
+      default:
+        return (
+          <LoginForm
+            onSuccess={handleAuthSuccess}
+            onSwitchToSignup={() => setMode('signup')}
+            onSwitchToForgotPassword={() => setMode('forgot-password')}
+          />
+        );
+    }
+  };
 
-  const result = await login(email, password);
+  const getPageTitle = () => {
+    switch (mode) {
+      case 'signup':
+        return 'Sign Up | Level Up LMS';
+      case 'forgot-password':
+        return 'Forgot Password | Level Up LMS';
+      default:
+        return 'Sign In | Level Up LMS';
+    }
+  };
 
-  if (result?.twoFARequired) {
-    toast("2FA required. Please verify your account.");
-    navigate("/verify-account", {
-      state: { userId: result.userId },
-    });
-  } else if (result?.user) {
-    toast.success("Login successful!");
-    navigate("/home");
-  } else if (error) {
-    toast.error(error);
-  }
-};
+  const getPageDescription = () => {
+    switch (mode) {
+      case 'signup':
+        return 'Create your account and start your learning journey';
+      case 'forgot-password':
+        return 'Reset your password to regain access to your account';
+      default:
+        return 'Sign in to your account to continue learning';
+    }
+  };
 
   return (
-        <AuthLayout slogan="Level up your skills. Learn anytime, anywhere" imageVector={<Lottie animationData={animationData} loop={true} />}>
-            <div className="w-full max-w-md mx-auto px-4">
-                <div className="flex flex-col space-y-6">
-                    <div className="flex justify-between items-center">
-                        <Heading>Log In</Heading>
-                        <p>Don't have an account? <Link className="font-bold text-primary-400" to={'/register'}>SignUp</Link></p>
-                    </div>
-                    <SubHeading>Welcome back to LevelUp!</SubHeading>
-                    <SubText>Log in to continue your learning journey.</SubText>
-                </div>
-                <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-                    <AuthFormField type="email" placeholder="Enter Your Email" icon={sms} value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <AuthFormField type="password" placeholder="Enter Your Password" icon={lock} value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <div className="text-right text-sm text-blue-800">
-                        <Link to="/forgot-password">Forget Password</Link>
-                    </div>
-                    <button className="w-full py-2 bg-primary-400 rounded-lg flex items-center justify-center gap-2 text-white" type="submit" data-testid="main-login-btn" disabled={loading}>
-                        <span>{loading ? "Logining..." : "Login"}</span>
-                        <img src={loginIcon} alt="login icon" className="w-5 h-5" />
-                    </button>
-                </form>
-                <div className="flex items-center my-6">
-                    <hr className="flex-grow border-t border-gray-300" />
-                    <span className="mx-4 text-gray-500 text-sm">Or with</span>
-                    <hr className="flex-grow border-t border-gray-300" />
-                </div>
+    <>
+      <Helmet>
+        <title>{getPageTitle()}</title>
+        <meta name="description" content={getPageDescription()} />
+      </Helmet>
 
-                <div className="mt-6 flex flex-col space-y-2">
-                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
-                        <img src={google} alt="login icon" className="w-5 h-5" />
-                        <span>Log in with Google</span>
-                    </ButtonUI>
-                    <ButtonUI className="w-full flex items-center justify-center gap-2 text-primary-400 font-medium bg-transparent border-2 border-primary-400 hover:bg-transparent" type="submit">
-                        <img src={microsoft} alt="login icon" className="w-5 h-5" />
-                        <span>Log in with Microsoft</span>
-                    </ButtonUI>
-                </div>
-                {/* <AuthFooterLink text="Don't have an account?" to="/signup" linkText="Sign Up" /> */}
-            </div>
-        </AuthLayout>
-    );
-}
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          {/* Logo */}
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-primary-600 mb-2">
+              Level Up
+            </h1>
+            <p className="text-gray-600">
+              {mode === 'signup' && 'Join our learning community'}
+              {mode === 'forgot-password' && 'Reset your password'}
+              {mode === 'login' && 'Welcome back to your learning journey'}
+            </p>
+          </div>
+
+          {/* Auth Form */}
+          {renderAuthForm()}
+
+          {/* Footer */}
+          <div className="text-center text-sm text-gray-500">
+            <p>
+              By continuing, you agree to our{' '}
+              <a href="/terms" className="text-primary-600 hover:text-primary-800">
+                Terms of Service
+              </a>{' '}
+              and{' '}
+              <a href="/privacy" className="text-primary-600 hover:text-primary-800">
+                Privacy Policy
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Login;

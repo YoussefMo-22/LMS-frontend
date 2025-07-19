@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useEnrollInCourse, useApplyCoupon } from '../hooks/useCourseFlow';
+import { useCreateEnrollment } from '../hooks/useEnrollment';
+import { useApplyCoupon } from '../hooks/useCoupon';
 import LoadingSpinner from '../../../shared/components/UI/LoadingSpinner';
 
 interface CourseCheckoutProps {
@@ -12,29 +13,51 @@ interface CourseCheckoutProps {
 export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled }: CourseCheckoutProps) {
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
+  const [finalPrice, setFinalPrice] = useState<number | null>(null);
   const [couponError, setCouponError] = useState('');
+  const [enrollError, setEnrollError] = useState('');
   const [enrolling, setEnrolling] = useState(false);
 
-  const enrollMutation = useEnrollInCourse(courseId);
+  const enrollMutation = useCreateEnrollment(courseId);
   const applyCouponMutation = useApplyCoupon();
 
   const handleApplyCoupon = async () => {
     setCouponError('');
+    setDiscount(0);
+    setFinalPrice(null);
+    if (!coupon) return;
     try {
-      const res = await applyCouponMutation.mutateAsync({ courseId, coupon });
-      setDiscount(res.discount || 0);
+      const res = await applyCouponMutation.mutateAsync({ couponCode: coupon, courseId });
+      setDiscount(res.data.discount || 0);
+      setFinalPrice(res.data.finalPrice);
     } catch (err: any) {
       setCouponError(err?.response?.data?.message || 'Invalid coupon');
+      setDiscount(0);
+      setFinalPrice(null);
     }
   };
 
   const handleEnroll = async () => {
+    setEnrollError('');
     setEnrolling(true);
     try {
-      await enrollMutation.mutateAsync({ coupon });
-      onEnrolled();
-    } catch (err) {
-      // handle error (toast, etc.)
+      const isPaid = (finalPrice ?? price) > 0;
+      const params = isPaid ? {
+        success_url: window.location.origin + '/enroll-success',
+        cancel_url: window.location.origin + '/enroll-cancel',
+      } : {};
+      const res = await enrollMutation.mutateAsync({ couponCode: coupon, ...params });
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+        return;
+      }
+      if (res.status === 'success') {
+        onEnrolled();
+      } else {
+        setEnrollError(res.message || 'Enrollment failed.');
+      }
+    } catch (err: any) {
+      setEnrollError(err?.response?.data?.message || 'Enrollment failed.');
     } finally {
       setEnrolling(false);
     }
@@ -47,7 +70,6 @@ export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled
         <button className="w-full bg-primary-400 text-white py-2 rounded font-semibold hover:bg-primary-500 transition">
           Continue Course
         </button>
-        {/* TODO: Show progress bar, certificate, etc. */}
       </div>
     );
   }
@@ -55,7 +77,7 @@ export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled
   return (
     <div className="space-y-4">
       <div className="text-2xl font-bold text-primary-400">
-        ${discount ? (price - discount).toFixed(2) : price.toFixed(2)}
+        ${finalPrice !== null ? finalPrice.toFixed(2) : (discount ? (price - discount).toFixed(2) : price.toFixed(2))}
         {discount > 0 && (
           <span className="ml-2 text-gray-400 line-through text-lg">${price.toFixed(2)}</span>
         )}
@@ -78,6 +100,7 @@ export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled
         </button>
       </div>
       {couponError && <div className="text-red-500 text-sm">{couponError}</div>}
+      {enrollError && <div className="text-red-500 text-sm">{enrollError}</div>}
       <button
         className="w-full bg-primary-400 text-white py-2 rounded font-semibold hover:bg-primary-500 transition"
         onClick={handleEnroll}

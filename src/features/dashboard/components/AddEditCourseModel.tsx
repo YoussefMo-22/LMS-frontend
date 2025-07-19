@@ -1,13 +1,63 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import ButtonUI from "../../../shared/components/UI/Button";
+import { useCreateCourse, useUpdateInstructorCourse, useInstructorCourse } from '../../courses/hooks/useCourseFlow';
+import type { CreateCourseData, UpdateCourseData } from '../../courses/types';
 
 const AddEditCourseModal = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const isOpen = searchParams.get("modal") === "add" || searchParams.get("modal") === "edit";
+  const courseId = searchParams.get("id");
+  const isEdit = searchParams.get("modal") === "edit";
+  const createCourse = useCreateCourse();
+  const updateCourse = useUpdateInstructorCourse(courseId!);
+  const { data: courseData } = useInstructorCourse(courseId!);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateCourseData>({
+    defaultValues: {
+      title: "",
+      description: "",
+      price: 0,
+      duration: "",
+      category: "",
+    },
+  });
+
+  // Load course data for editing
+  useEffect(() => {
+    if (isEdit && courseData?.data) {
+      const course = courseData.data;
+      reset({
+        title: course.title,
+        description: course.description,
+        price: course.price,
+        duration: course.duration,
+        category: course.category,
+      });
+    }
+  }, [isEdit, courseData, reset]);
 
   const handleClose = () => navigate("/dashboard/courses", { replace: true });
+
+  const onSubmit = async (data: CreateCourseData) => {
+    try {
+      if (isEdit && courseId) {
+        await updateCourse.mutateAsync(data as UpdateCourseData);
+      } else {
+        await createCourse.mutateAsync(data);
+      }
+      handleClose();
+    } catch (error) {
+      console.error("Error saving course:", error);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -15,29 +65,88 @@ const AddEditCourseModal = () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg relative">
         <h2 className="text-2xl font-bold mb-4">
-          {searchParams.get("modal") === "edit" ? "Edit Course" : "Add New Course"}
+          {isEdit ? "Edit Course" : "Add New Course"}
         </h2>
 
-        <form className="space-y-4">
-          <input
-            type="text"
-            placeholder="Course Title"
-            className="w-full border p-2 rounded"
-          />
-          <input
-            type="number"
-            placeholder="Number of Enrolled Students"
-            className="w-full border p-2 rounded"
-          />
-          <select className="w-full border p-2 rounded">
-            <option value="published">Published</option>
-            <option value="in-progress">In Progress</option>
-            <option value="rejected">Rejected</option>
-          </select>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <input
+              {...register("title", { required: "Title is required" })}
+              type="text"
+              placeholder="Course Title"
+              className="w-full border p-2 rounded"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+            )}
+          </div>
+
+          <div>
+            <textarea
+              {...register("description", { required: "Description is required" })}
+              placeholder="Course Description"
+              className="w-full border p-2 rounded h-24 resize-none"
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register("price", {
+                required: "Price is required",
+                min: { value: 0, message: "Price must be positive" },
+              })}
+              type="number"
+              placeholder="Price"
+              className="w-full border p-2 rounded"
+            />
+            {errors.price && (
+              <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register("duration", { required: "Duration is required" })}
+              type="text"
+              placeholder="Duration (e.g., 10 hours)"
+              className="w-full border p-2 rounded"
+            />
+            {errors.duration && (
+              <p className="text-red-500 text-sm mt-1">{errors.duration.message}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register("category", { required: "Category is required" })}
+              type="text"
+              placeholder="Category (e.g., Web Development)"
+              className="w-full border p-2 rounded"
+            />
+            {errors.category && (
+              <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
+            )}
+          </div>
 
           <div className="flex justify-end gap-2">
-            <ButtonUI type="button" className="bg-gray-300" onClick={handleClose}>Cancel</ButtonUI>
-            <ButtonUI type="submit" className="bg-primary-500 text-white">Save</ButtonUI>
+            <ButtonUI
+              type="button"
+              className="bg-gray-300"
+              onClick={handleClose}
+              disabled={createCourse.isPending || updateCourse.isPending}
+            >
+              Cancel
+            </ButtonUI>
+            <ButtonUI
+              type="submit"
+              className="bg-primary-500 text-white"
+              disabled={createCourse.isPending || updateCourse.isPending}
+            >
+              {createCourse.isPending || updateCourse.isPending ? "Saving..." : "Save"}
+            </ButtonUI>
           </div>
         </form>
       </div>

@@ -1,16 +1,12 @@
 import { axiosInstance } from '../../../api/axiosInstance';
 
-// Courses
-export const getCourses = (params?: any) =>
-  axiosInstance.get('/courses', { params }).then(res => res.data);
-export const createCourse = (data: any) =>
-  axiosInstance.post('/courses', data).then(res => res.data);
-export const updateCourse = (courseId: string, data: any) =>
-  axiosInstance.patch(`/courses/${courseId}`, data).then(res => res.data);
-export const deleteCourse = (courseId: string) =>
-  axiosInstance.delete(`/courses/${courseId}`).then(res => res.data);
-export const getCourse = (courseId: string) =>
-  axiosInstance.get(`/courses/${courseId}/forinstructor`).then(res => res.data);
+// Get instructor courses
+export const getInstructorCourses = (params?: any) =>
+  axiosInstance.get('courses', { params }).then(res => res.data);
+
+// Create instructor course
+export const createInstructorCourse = (data: any) =>
+  axiosInstance.post('courses', data).then(res => res.data);
 
 // Assignments
 export const getAssignments = (courseId?: string) =>

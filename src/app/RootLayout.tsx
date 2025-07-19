@@ -6,7 +6,6 @@ import Navbar from "../shared/components/Navbar";
 import NavbarLogin from "../shared/components/NavbarLogin";
 import Cookies from "js-cookie";
 import ErrorBoundary from "../shared/components/ErrorBoundary";
-import { HelmetProvider } from 'react-helmet-async';
 
 const RootLayout: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -31,22 +30,20 @@ const RootLayout: React.FC = () => {
   }, []);
 
   return (
-    <HelmetProvider>
-      <ErrorBoundary>
-        <div className="flex flex-col min-h-screen">
-          <header role="banner">
-            {user ? <NavbarLogin user={user} /> : <Navbar />}
-          </header>
-          <nav aria-label="Main navigation" className="sr-only" />
-          <main role="main" className="flex-1">
-            <Outlet />
-          </main>
-          <footer role="contentinfo">
-            <Footer />
-          </footer>
-        </div>
-      </ErrorBoundary>
-    </HelmetProvider>
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
+        <header role="banner">
+          {user ? <NavbarLogin user={user} /> : <Navbar />}
+        </header>
+        <nav aria-label="Main navigation" className="sr-only" />
+        <main role="main" className="flex-1">
+          <Outlet />
+        </main>
+        <footer role="contentinfo">
+          <Footer />
+        </footer>
+      </div>
+    </ErrorBoundary>
   );
 };
 

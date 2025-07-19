@@ -1,0 +1,10 @@
+import { axiosInstance } from '../../../api/axiosInstance';
+import type { LiveSessionResponse, LiveSessionListResponse } from '../types/liveSession';
+
+// Create live session
+export const createLiveSession = (data: any) =>
+  axiosInstance.post('live-sessions/', data).then(res => res.data);
+
+// 2. Get Live Sessions by Course
+export const getLiveSessionsByCourse = (courseId: string, upcoming?: boolean): Promise<LiveSessionListResponse> =>
+  axiosInstance.get(`/live-sessions/${courseId}`, { params: upcoming !== undefined ? { upcoming } : {} }).then(res => res.data); 

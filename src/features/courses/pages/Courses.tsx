@@ -30,7 +30,8 @@ function Courses() {
     const [languageFilter, setLanguageFilter] = useState('');
     const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
     
-    const { courses, loading, error, pagination } = useCourses(currentPage, pageSize);
+    // FIX: useCourses expects a filters object
+    const { courses, loading, error, pagination } = useCourses({ page: currentPage, limit: pageSize });
 
     // Get unique languages from courses
     const languages = useMemo(() => {
@@ -75,7 +76,8 @@ function Courses() {
         return courses.filter((course: Course) => {
             const matchesSearch = searchQuery === '' || 
                 course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                course.instructor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                (typeof course.instructor === 'object' && course.instructor?.name && course.instructor.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                (typeof course.instructor === 'string' && course.instructor.toLowerCase().includes(searchQuery.toLowerCase())) ||
                 (course.category && course.category.toLowerCase().includes(searchQuery.toLowerCase()));
 
             const matchesLanguage = languageFilter === '' || 
@@ -186,6 +188,7 @@ function Courses() {
                                                 const cardProps = {
                                                     ...course,
                                                     id: typeof course._id === 'string' ? course._id : String(idx),
+                                                    instructor: typeof course.instructor === 'object' && course.instructor ? course.instructor : { name: String(course.instructor), photo: '' },
                                                 };
                                                 return (
                                                     <div style={style} key={cardProps.id}>
@@ -204,7 +207,7 @@ function Courses() {
                                         key={course._id}
                                         id={course._id}
                                         title={course.title}
-                                        instructor={course.instructor}
+                                        instructor={typeof course.instructor === 'object' && course.instructor ? course.instructor : { name: String(course.instructor), photo: '' }}
                                         price={course.priceAfterDiscount || course.price}
                                         originalPrice={course.priceAfterDiscount ? course.price : undefined}
                                         language={course.language || course.Language}

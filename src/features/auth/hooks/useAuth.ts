@@ -1,63 +1,128 @@
 // src/auth/useAuth.ts
-import { useState } from "react";
-import * as authAPI from "./authAPI";
-import Cookies from "js-cookie";
-export function useAuth() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { authApi } from '../api/authApi';
+import type { 
+  SignupRequest, 
+  LoginRequest, 
+  UpdatePasswordRequest,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  Verify2FARequest
+} from '../types/auth';
 
-const login = async (email: string, password: string) => {
-  setLoading(true);
-  setError(null);
-  try {
-    const res = await authAPI.login(email, password);
+// Secure storage utilities (same as in AuthContext)
+const TOKEN_KEY = 'lms_auth_token';
 
-    if (res.message === "2FA required") {
-      return { twoFARequired: true, userId: res.userId };
+const secureStorage = {
+  setToken: (token: string) => {
+    try {
+      sessionStorage.setItem(TOKEN_KEY, token);
+    } catch (error) {
+      console.error('Failed to store token:', error);
     }
+  },
 
-    const { token, data } = res;
+  getToken: (): string | null => {
+    try {
+      return sessionStorage.getItem(TOKEN_KEY);
+    } catch (error) {
+      console.error('Failed to get token:', error);
+      return null;
+    }
+  },
 
-    Cookies.set("token", token, { expires: 28 });
-    Cookies.set("user", JSON.stringify(data.user), { expires: 28 });
-
-    return { user: data.user };
-  } catch (err: any) {
-    setError(err.response?.data?.message || "Login failed");
-    return null;
-  } finally {
-    setLoading(false);
+  removeToken: () => {
+    try {
+      sessionStorage.removeItem(TOKEN_KEY);
+    } catch (error) {
+      console.error('Failed to remove token:', error);
+    }
   }
 };
 
-  const register = async (formData: {
-    name: string;
-    email: string;
-    password: string;
-    role: string;
-  }) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const user = await authAPI.register(formData);
-      return user;
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Registration failed");
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  };
+export const useSignup = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: (data: SignupRequest) => authApi.signup(data),
+    onSuccess: (data) => {
+      if (data.token) {
+        // Store token securely
+        secureStorage.setToken(data.token);
+      }
+      // Invalidate and refetch user data
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+};
 
-  const logout = () => {
-    authAPI.logout();
-  };
+export const useLogin = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: (data: LoginRequest) => authApi.login(data),
+    onSuccess: (data) => {
+      if ('token' in data && data.token) {
+        // Store token securely
+        secureStorage.setToken(data.token);
+      }
+      // Invalidate and refetch user data
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+};
 
-  return {
-    login,
-    register,
-    logout,
-    loading,
-    error,
-  };
-}
+export const useUpdatePassword = () => {
+  return useMutation({
+    mutationFn: (data: UpdatePasswordRequest) => authApi.updatePassword(data),
+  });
+};
+
+export const useGenerate2FA = () => {
+  return useMutation({
+    mutationFn: () => authApi.generate2FA(),
+  });
+};
+
+export const useVerify2FA = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: (data: Verify2FARequest) => authApi.verify2FA(data),
+    onSuccess: (data) => {
+      if (data.token) {
+        // Store token securely
+        secureStorage.setToken(data.token);
+      }
+      // Invalidate and refetch user data
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation({
+    mutationFn: (data: ForgotPasswordRequest) => authApi.forgotPassword(data),
+  });
+};
+
+export const useResetPassword = () => {
+  return useMutation({
+    mutationFn: ({ code, data }: { code: string; data: ResetPasswordRequest }) => 
+      authApi.resetPassword(code, data),
+  });
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: () => authApi.logout(),
+    onSuccess: () => {
+      // Clear token securely
+      secureStorage.removeToken();
+      // Clear user data from cache
+      queryClient.clear();
+    },
+  });
+};

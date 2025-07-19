@@ -7,6 +7,8 @@ import CourseSidebar from '../components/CourseSidebar';
 import LessonContent from '../components/LessonContent';
 import CourseReviews from '../components/CourseReviews';
 import CertificateSection from '../components/CertificateSection';
+import LiveSessionsList from '../components/LiveSessionsList';
+import QuizzesList from '../components/QuizzesList';
 import { Helmet } from 'react-helmet-async';
 
 export default function CourseDetails() {
@@ -46,9 +48,10 @@ export default function CourseDetails() {
     );
   }
 
-  // Detect enrollment (assume courseData.data.isEnrolled or similar)
-  const isEnrolled = courseData.data.isEnrolled || false;
-  const price = courseData.data.price || 0;
+  // Use courseData.data for all course fields
+  const course = courseData.data;
+  const isEnrolled = 'isEnrolled' in course ? !!(course as any).isEnrolled : false;
+  const price = course.price || 0;
 
   // Lessons and progress
   const lessons = lessonsData.data.lessons || [];
@@ -58,10 +61,10 @@ export default function CourseDetails() {
   // Default to first lesson if none selected
   const currentLessonId = selectedLessonId || (lessons[0]?._id ?? null);
 
-  const courseTitle = courseData?.title || 'Course Details';
-  const courseDesc = courseData?.description || 'View course details, lessons, and enroll on LevelUp LMS.';
+  const courseTitle = course.title || 'Course Details';
+  const courseDesc = course.description || 'View course details, lessons, and enroll on LevelUp LMS.';
   const courseUrl = `https://your-lms-domain.com/course/${courseId}`;
-  const instructorName = courseData?.instructor?.name || 'Instructor';
+  const instructorName = typeof course.instructor === 'object' && course.instructor?.name ? course.instructor.name : 'Instructor';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',
@@ -104,8 +107,8 @@ export default function CourseDetails() {
             <div className="md:col-span-2 space-y-6">
               {/* CourseHeader, Instructor, etc. */}
               <div className="bg-white rounded-lg shadow p-6">
-                <h1 className="text-3xl font-bold mb-2">{courseData.data.title}</h1>
-                <p className="text-gray-600 mb-4">{courseData.data.description}</p>
+                <h1 className="text-3xl font-bold mb-2">{course.title}</h1>
+                <p className="text-gray-600 mb-4">{course.description}</p>
                 {/* Instructor, rating, etc. */}
               </div>
               {/* Lesson Content */}
@@ -116,6 +119,10 @@ export default function CourseDetails() {
                   onComplete={refetchLessons}
                 />
               </div>
+              {/* Upcoming Live Sessions */}
+              <LiveSessionsList courseId={courseId!} />
+              {/* Course Quizzes */}
+              <QuizzesList courseId={courseId!} />
             </div>
 
             {/* Right Column: Checkout/Progress */}
