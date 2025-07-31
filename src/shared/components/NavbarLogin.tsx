@@ -3,9 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import cart from "../../assets/shopping-cart.svg";
 import noti from "../../assets/notification-bing.svg"
-import profile from "../../assets/profile.png";
 import SearchInput from "./SearchInput";
-import Cookies from "js-cookie";
+import { useAuth } from "../../features/auth/context/AuthContext";
 
 
 type NavbarLoginProps = {
@@ -21,14 +20,14 @@ export default function NavbarLogin({ user }: NavbarLoginProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
-const handleLogout = () => {
-    Cookies.remove("user");
-    Cookies.remove("token");
-
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
     navigate("/");
   };
-
+const navigateToDashboard = () => {
+  navigate("/dashboard");
+  };
   useEffect(() => {
     console.log("User in NavbarLogin:", user);
   }, [user]);
@@ -69,11 +68,11 @@ const handleLogout = () => {
           <div className="relative">
             <div
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center space-x-2 xl:space-x-4 p-1 border border-primary-400 rounded-xl xl:rounded-full cursor-pointer"
+              className="flex items-center space-x-2 xl:space-x-4 p-1 cursor-pointer"
             >
-              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+              {/* <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
                 <img src={user?.profilePicture || profile} alt="profile" />
-              </div>
+              </div> */}
               <div className="text-primary-500 font-semibold">{user?.name || "Guest"}</div>
               <ChevronDown color="#1b347c" />
             </div>
@@ -81,8 +80,14 @@ const handleLogout = () => {
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-50">
                 <button
+                  onClick={navigateToDashboard}
+                  className="w-full text-left px-4 py-5 hover:bg-gray-100 text-sm text-primary-400"
+                >
+                  Dashboard
+                </button>
+                <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600"
+                  className="w-full text-left px-4 py-5 hover:bg-gray-100 text-sm text-red-600"
                 >
                   Logout
                 </button>

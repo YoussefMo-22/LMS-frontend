@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import React from "react";
 import RoleBasedRouter from "./RoleBasedRouter";
+import LoadingSpinner from "../shared/components/UI/LoadingSpinner";
 
 // Lazy-loaded pages
 const RootLayout = lazy(() => import("../app/RootLayout"));
@@ -141,7 +142,7 @@ const AccountInactive = lazy(() => Promise.resolve({
 }));
 
 const Load = (Component: React.LazyExoticComponent<any>) => (
-  <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+  <Suspense fallback={<div className="p-10 text-center"><LoadingSpinner /></div>}>
     <Component />
   </Suspense>
 );

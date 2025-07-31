@@ -6,7 +6,7 @@ export const getInstructorCourses = (params?: any) =>
 
 // Create instructor course
 export const createInstructorCourse = (data: any) =>
-  axiosInstance.post('courses', data).then(res => res.data);
+  axiosInstance.post('api/v1/courses', data).then(res => res.data);
 
 // Assignments
 export const getAssignments = (courseId?: string) =>

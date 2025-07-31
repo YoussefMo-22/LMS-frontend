@@ -5,7 +5,7 @@ import roles from "../../../assets/roles.svg";
 import verified from "../../../assets/verified.svg";
 import chooseImg from "../../../assets/chooseImg.png";
 import ButtonUI from "../../../shared/components/UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 function ChooseSection() {
@@ -16,7 +16,11 @@ function ChooseSection() {
     { text: "Supports Students, Instructors, Admins & Organizations", icon: roles },
     { text: "Custom-Branded LMS Solutions for Enterprises", icon: verified },
   ];
+    const navigate = useNavigate();
 
+    const handleNavigate = () => {
+        navigate("/login");
+    };
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
@@ -47,11 +51,11 @@ function ChooseSection() {
           </ul>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
-            <ButtonUI className="text-white px-16 bg-primary-400">
+            <ButtonUI onClick={handleNavigate} className="text-white px-16 bg-primary-400">
               Learn More
             </ButtonUI>
             <Link
-              to="/register"
+              to="/login"
               className="text-primary-400 font-semibold flex items-center gap-1"
             >
               Sign Up <ChevronRight />

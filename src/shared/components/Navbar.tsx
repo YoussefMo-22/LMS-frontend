@@ -54,12 +54,12 @@ export default function Navbar() {
 
           {/* Auth Buttons */}
           <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4 px-4 pb-4 lg:p-0">
-            <NavLink
+            {/* <NavLink
               to="/register"
               className="border border-primary-500 text-primary-500 px-10 py-2 rounded-2xl hover:bg-primary-100 transition"
             >
               Join
-            </NavLink>
+            </NavLink> */}
             <NavLink
               to="/login"
               className="bg-primary-500 text-white px-10 py-2 rounded-2xl hover:bg-primary-600 transition"

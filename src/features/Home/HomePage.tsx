@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import EnrolledCourse from "../../shared/components/EnrolledCourse";
 import QuizCard from "../../shared/components/QuizCard";
 import CourseCard from "../../shared/components/CourseCard";
+import { useAuth } from "../auth/context/AuthContext";
 
 function HomePage() {
+      const { user } = useAuth();
     return (
         <div>
             <div className="container mx-auto px-4 py-8">
@@ -23,7 +25,7 @@ function HomePage() {
                 {/* Welcome Section */}
                 <div className="mt-8 py-10 px-6 bg-primary-400 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div className="text-white space-y-4">
-                        <h2 className="text-2xl md:text-3xl font-bold">Welcome Back, Ahmed!</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold">Welcome Back, {user?.name}!</h2>
                         <p className="text-sm md:text-base">
                             Ready to continue your learning journey? You're doing great!
                         </p>
@@ -82,7 +84,7 @@ function HomePage() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                        <CourseCard
+                        {/* <CourseCard
                             id={1}
                             title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
                             instructor="Dr. Angela Yu"
@@ -105,7 +107,7 @@ function HomePage() {
                             price={499.99}
                             originalPrice={599.99}
                             rating={4}
-                        />
+                        /> */}
 
                     </div>
                 </div>

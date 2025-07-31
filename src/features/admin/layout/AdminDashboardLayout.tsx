@@ -28,12 +28,13 @@ import {
   AlertCircle
 } from "lucide-react";
 import Cookies from "js-cookie";
+import { useAuth } from '../../auth/context/AuthContext';
 
 const AdminDashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
+  const {logout} = useAuth();
 
   // Get user from cookies
   const userCookie = Cookies.get("user");
@@ -45,9 +46,7 @@ const AdminDashboardLayout: React.FC = () => {
   }, [location.pathname]);
 
   const handleLogout = () => {
-    Cookies.remove("user");
-    Cookies.remove("token");
-    navigate("/");
+    logout()
   };
 
   // Get user initials

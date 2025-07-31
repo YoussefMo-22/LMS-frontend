@@ -1,7 +1,13 @@
 import ButtonUI from "../../../shared/components/UI/Button";
 import ready from "../../../assets/readyImg.png";
+import { useNavigate } from "react-router-dom";
 
 function ReadySection() {
+      const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate("/login");
+    };
   return (
     <section className="bg-primary-100 py-16">
       <div className="container mx-auto ">
@@ -17,7 +23,7 @@ function ReadySection() {
             <p className="text-dark-400 text-lg mb-6">
               Start your journey today — it's free to sign up!
             </p>
-            <ButtonUI className="px-6 py-3 text-lg text-white">Get Started Now</ButtonUI>
+            <ButtonUI onClick={handleNavigate} className="px-6 py-3 text-lg text-white">Get Started Now</ButtonUI>
           </div>
 
           {/* Image Section */}
