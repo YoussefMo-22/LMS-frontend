@@ -33,7 +33,6 @@ export default function CourseDetails() {
   const {
     data: lessonData,
     isLoading: lessonLoading,
-    isError: lessonError,
   } = useLesson(selectedLessonId || '');
 
   if (courseLoading || lessonsLoading) {

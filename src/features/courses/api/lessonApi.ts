@@ -3,7 +3,7 @@ import { axiosInstance } from '../../../api/axiosInstance';
 // ===== LESSON MANAGEMENT =====
 
 // Create Lesson
-export const createLesson = (courseId: string, data: FormData): Promise<any> =>
+export const createLesson = (data: FormData): Promise<any> =>
   axiosInstance.post('lessons/', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then(res => res.data);
 
 // Get Lessons for Course
@@ -49,3 +49,7 @@ export const updateLessonNote = (lessonId: string, noteId: string, data: { conte
 // Delete Lesson Note
 export const deleteLessonNote = (lessonId: string, noteId: string): Promise<any> =>
   axiosInstance.delete(`lessons/${lessonId}/notes/${noteId}`).then(res => res.data); 
+
+export function getLessonsByCourse(courseId: string): Promise<import("../types/lesson").LessonListResponse> {
+  return axiosInstance.get(`lessons/course/${courseId}`).then(res => res.data);
+}

@@ -3,7 +3,6 @@ import type {
   Coupon,
   CouponResponse,
   CouponListResponse,
-  ApplyCouponResponse,
 } from '../types/coupon';
 
 // Create coupon

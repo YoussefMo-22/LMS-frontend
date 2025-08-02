@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { earningApi } from '../api/earningApi';
-import type { EarningsByCourseParams, EarningsByInstructorParams } from '../types/earning';
 
 export const useInstructorEarnings = () => {
   return useQuery({

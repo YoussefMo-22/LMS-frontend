@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAllPayments } from '../../courses/hooks/usePayment';
 import { Helmet } from 'react-helmet-async';
 
 const AdminPayments = () => {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [sort, setSort] = useState('payment_date,-amount');
+  const [limit] = useState(10);
+  const [sort] = useState('payment_date,-amount');
   const { data, isLoading, error } = useAllPayments({ page, limit, sort });
   const payments = data?.data?.payments || [];
 

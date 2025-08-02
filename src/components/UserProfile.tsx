@@ -4,10 +4,9 @@ import { useAuth } from '../features/auth/context/AuthContext';
 
 interface UserProfileProps {
   onClose?: () => void;
-  isOpen?: boolean;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ onClose, isOpen = false }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
   const { user, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

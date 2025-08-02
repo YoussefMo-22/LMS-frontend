@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useQuizzes, useDeleteQuiz } from '../../courses/hooks/useQuiz';
 
-const AdminQuizzes: React.FC = () => {
+const AdminQuizzes = () => {
   const [filters, setFilters] = useState({
     course_id: '',
     title: '',
@@ -153,7 +153,7 @@ const AdminQuizzes: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Avg Time Limit</p>
                 <p className="text-2xl font-bold text-gray-900">
                   {quizzes.length > 0 
-                    ? Math.round(quizzes.reduce((sum, quiz) => sum + quiz.time_limit, 0) / quizzes.length)
+                    ? Math.round(quizzes.reduce((sum: number, quiz: any) => sum + quiz.time_limit, 0) / quizzes.length)
                     : 0} min
                 </p>
               </div>
@@ -198,7 +198,7 @@ const AdminQuizzes: React.FC = () => {
                     </td>
                   </tr>
                 ) : (
-                  quizzes.map((quiz) => (
+                  quizzes.map((quiz: any) => (
                     <tr key={quiz._id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAllCoupons, useCreateCoupon, useUpdateCoupon, useDeleteCoupon } from '../../courses/hooks/useCoupon';
 import type { Coupon } from '../../courses/types/coupon';
 import { Helmet } from 'react-helmet-async';
@@ -14,7 +14,6 @@ const emptyCoupon: Partial<Coupon> = {
 const AdminCoupons = () => {
   const { data, isLoading, error } = useAllCoupons();
   const createCoupon = useCreateCoupon();
-  const [editingCoupon, setEditingCoupon] = useState<Partial<Coupon> | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<Partial<Coupon>>(emptyCoupon);
   const [editId, setEditId] = useState<string | null>(null);

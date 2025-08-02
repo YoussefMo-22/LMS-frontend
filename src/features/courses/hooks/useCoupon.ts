@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/couponApi';
-import type { Coupon, CouponResponse, CouponListResponse, ApplyCouponResponse } from '../types/coupon';
+import type { Coupon, CouponResponse, CouponListResponse } from '../types/coupon';
 
 export const useCreateCoupon = () => {
   const queryClient = useQueryClient();
@@ -20,7 +20,7 @@ export const useApplyCoupon = () =>
 export const useAllCoupons = () =>
   useQuery<CouponListResponse, Error>({
     queryKey: ['allCoupons'],
-    queryFn: api.getAllCoupons,
+    queryFn: api.getCoupons,
   });
 
 export const useMyCoupons = (id: string) =>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { 
   Home, 
   BookOpen, 
@@ -17,28 +17,21 @@ import {
   Menu,
   X,
   Search,
-  Bell,
   User,
   Shield,
   Database,
   Activity,
-  Calendar,
   DollarSign,
-  TrendingUp,
-  AlertCircle
 } from "lucide-react";
-import Cookies from "js-cookie";
 import { useAuth } from '../../auth/context/AuthContext';
 
 const AdminDashboardLayout: React.FC = () => {
+  const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const {logout} = useAuth();
 
-  // Get user from cookies
-  const userCookie = Cookies.get("user");
-  const user = userCookie ? JSON.parse(userCookie) : null;
 
   // Close sidebar on route change
   useEffect(() => {
@@ -214,7 +207,7 @@ const AdminDashboardLayout: React.FC = () => {
                     </div>
                     <div className="py-1">
                       <Link
-                        to="/profile"
+                        to="profile"
                         className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         <User className="w-4 h-4 mr-3" />

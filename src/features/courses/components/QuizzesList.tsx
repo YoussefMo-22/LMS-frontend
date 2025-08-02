@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuizzes } from '../hooks/useQuiz';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +17,7 @@ const QuizzesList: React.FC<QuizzesListProps> = ({ courseId }) => {
     <div className="bg-white rounded-lg shadow p-6 mt-8">
       <h2 className="text-xl font-bold mb-4 text-primary-400">Course Quizzes</h2>
       <div className="space-y-4">
-        {quizzes.map(quiz => (
+        {quizzes.map((quiz: any) => (
           <div key={quiz._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
             <div className="flex items-center justify-between">
               <div className="flex-1">

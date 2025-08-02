@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/enrollmentApi';
-import type { EnrollmentResponse, EnrollmentListResponse } from '../types/enrollment';
+import type { EnrollmentListResponse } from '../types/enrollment';
 import { axiosInstance } from '../../../api/axiosInstance';
 
 export interface Enrollment {

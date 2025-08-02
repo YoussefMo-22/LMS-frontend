@@ -6,9 +6,6 @@ import type {
   CourseFilters,
   CoursesResponse,
   SingleCourseResponse,
-  CreateCourseResponse,
-  UpdateCourseResponse,
-  DeleteCourseResponse,
 } from '../types';
 
 const defaultStaleTime = 1000 * 60 * 5; // 5 minutes

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useQuizzes, useCreateQuiz, useUpdateQuiz, useDeleteQuiz } from '../../courses/hooks/useQuiz';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import type { CreateQuizRequest, UpdateQuizRequest, Quiz } from '../../courses/types/quiz';
+import type { Quiz } from '../../courses/types/quiz';
 
 interface QuizFormData {
   course_id: string;

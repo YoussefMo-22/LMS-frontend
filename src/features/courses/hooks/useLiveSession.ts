@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/liveSessionApi';
-import type { LiveSessionResponse, LiveSessionListResponse } from '../types/liveSession';
+import type { LiveSessionListResponse } from '../types/liveSession';
 
 export const useCreateLiveSession = () => {
   const queryClient = useQueryClient();

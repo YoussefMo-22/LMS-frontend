@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMyCertificateForCourse } from '../hooks/useCertificate';
 import CertificateDisplay from './CertificateDisplay';
-import type { Certificate } from '../types/certificate';
 
 interface CertificateSectionProps {
   courseId: string;

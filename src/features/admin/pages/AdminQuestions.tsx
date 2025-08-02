@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useQuestionsByQuiz, useCreateQuestion, useUpdateQuestion, useDeleteQuestion } from '../../courses/hooks/useQuestion';
 import { useQuiz } from '../../courses/hooks/useQuiz';
 import { useForm, useFieldArray } from 'react-hook-form';
-import type { CreateQuestionRequest, UpdateQuestionRequest, QuestionType } from '../../courses/types/question';
+import type { QuestionType } from '../../courses/types/question';
 
 interface QuestionFormData {
   quiz_id: string;

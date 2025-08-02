@@ -1,5 +1,5 @@
 import { axiosInstance } from '../../../api/axiosInstance';
-import type { Course, CourseFilters, CreateCourseData, UpdateCourseData } from '../types';
+import type { CourseFilters, CreateCourseData, UpdateCourseData } from '../types';
 
 export const courseApi = {
   // Get all courses with filters

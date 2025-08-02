@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
-import { useAuth } from './context/AuthContext';
 
 type AuthMode = 'login' | 'signup' | 'forgot-password';
 
 const Login: React.FC = () => {
   const [mode, setMode] = useState<AuthMode>('login');
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleAuthSuccess = () => {
     // Navigate to dashboard or home page

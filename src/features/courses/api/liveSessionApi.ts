@@ -1,5 +1,5 @@
 import { axiosInstance } from '../../../api/axiosInstance';
-import type { LiveSessionResponse, LiveSessionListResponse } from '../types/liveSession';
+import type { LiveSessionListResponse } from '../types/liveSession';
 
 // Create live session
 export const createLiveSession = (data: any) =>

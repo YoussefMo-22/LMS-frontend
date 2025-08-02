@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPublicCourses } from '../api/courseApi';
+import { courseApi } from '../api/courseApi';
 import type { CourseFilters, CoursesResponse } from '../types';
 
 export const useCourses = (filters: CourseFilters = { page: 1, limit: 12 }) => {
@@ -12,7 +12,7 @@ export const useCourses = (filters: CourseFilters = { page: 1, limit: 12 }) => {
     refetch,
   } = useQuery<CoursesResponse, Error>({
     queryKey: ['courses', filters],
-    queryFn: () => getPublicCourses(filters),
+    queryFn: () => courseApi.getAllCourses(filters),
     staleTime: 1000 * 60 * 5, // 5 minutes
     gcTime: 1000 * 60 * 30, // 30 minutes
   });
@@ -23,7 +23,7 @@ export const useCourses = (filters: CourseFilters = { page: 1, limit: 12 }) => {
       const nextFilters = { ...filters, page: (filters.page || 1) + 1 };
       queryClient.prefetchQuery({
         queryKey: ['courses', nextFilters],
-        queryFn: () => getPublicCourses(nextFilters),
+        queryFn: () => courseApi.getAllCourses(nextFilters),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       });

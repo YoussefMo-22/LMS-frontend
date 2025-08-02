@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactPlayer from 'react-player';
 import { useMarkLessonComplete } from '../hooks/useCourseFlow';
 import LoadingSpinner from '../../../shared/components/UI/LoadingSpinner';

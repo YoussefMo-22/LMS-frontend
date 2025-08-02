@@ -9,9 +9,13 @@ export default function YouMightAlsoLike() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {courses.map((_, index) => (
           <CourseCard
-            id={index + 1}
+            key={index}
+            id={(index + 1).toString()}
             title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
-            instructor="Dr. Angela Yu"
+            instructor={{
+              name: "Dr. Angela Yu",
+              photo: "/path/to/instructor-photo.jpg"
+            }}
             price={499.99}
             originalPrice={599.99}
             rating={4}

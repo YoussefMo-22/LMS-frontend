@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../../auth/context/AuthContext';
 import { useMyEnrollments } from '../../courses/hooks/useEnrollment';
@@ -7,11 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner, { GridSkeleton } from '../../../shared/components/UI/LoadingSpinner';
 import {
   BookOpen,
-  GraduationCap,
   Clock,
-  Award,
-  TrendingUp,
-  Calendar,
   CheckCircle,
   AlertCircle,
   FileText,
@@ -69,7 +64,7 @@ const StudentOverview: React.FC = () => {
   ).length;
 
   const recentCourses = enrollments.slice(0, 3);
-  const recentSubmissions = submissions.slice(0, 5);
+  // const recentSubmissions = submissions.slice(0, 5);
 
   // Handle loading states
   if (enrollmentsLoading || submissionsLoading || statsLoading || activityLoading) {

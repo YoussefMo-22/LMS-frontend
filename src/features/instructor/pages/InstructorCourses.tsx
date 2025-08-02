@@ -9,7 +9,7 @@ export default function InstructorCourses() {
   const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['instructorCourses'],
-    queryFn: () => api.getCourses(),
+    queryFn: () => api.getInstructorCourses(),
   });
 
   const { data: earningsData } = useInstructorEarnings();
@@ -17,7 +17,7 @@ export default function InstructorCourses() {
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this course? This action cannot be undone.')) return;
-    await api.deleteCourse(id);
+    await api.deleteInstructorCourse(id);
     refetch();
     queryClient.invalidateQueries({ queryKey: ['instructorCourses'] });
   };

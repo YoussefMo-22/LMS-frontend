@@ -1,26 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { 
   FileText, 
   Plus, 
   Search, 
-  Filter, 
   Edit, 
   Trash2, 
   Eye, 
-  Download,
-  Calendar,
   Clock,
   Users,
   CheckCircle,
   AlertCircle,
   X,
-  ChevronDown,
-  MoreVertical
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import LoadingSpinner, { GridSkeleton } from '../../../shared/components/UI/LoadingSpinner';
+import { GridSkeleton } from '../../../shared/components/UI/LoadingSpinner';
 
 // Mock API functions - replace with actual API calls
 const fetchAssignments = async () => {

@@ -67,12 +67,12 @@ const LoginPage = lazy(() => import("../features/auth/Login"));
 const RegisterPage = lazy(() => import("../features/auth/register"));
 const ForgetPassword = lazy(() => import("../features/auth/ForgetPassword"));
 const ResetPassword = lazy(() => import("../features/auth/ResetPassword"));
-const ResetPasswordForm = lazy(() => import("../features/auth/components/ResetPasswordForm"));
+// const ResetPasswordForm = lazy(() => import("../features/auth/components/ResetPasswordForm"));
 const VerifyAccount = lazy(() => import("../features/auth/VerifyAccount"));
 const VerifyCode = lazy(() => import("../features/auth/VerifyCode"));
 
 // Legacy Dashboard Pages (for backward compatibility)
-const Overview = lazy(() => import("../features/dashboard/pages/Overview"));
+// const Overview = lazy(() => import("../features/dashboard/pages/Overview"));
 const MyCourses = lazy(() => import("../features/dashboard/pages/MyCourses"));
 const Assignments = lazy(() => import("../features/dashboard/pages/Assignments"));
 const Messages = lazy(() => import("../features/dashboard/pages/Messages"));

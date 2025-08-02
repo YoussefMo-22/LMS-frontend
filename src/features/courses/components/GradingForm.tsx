@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useUpdateSubmission } from '../hooks/useSubmission';
-import type { UpdateSubmissionRequest, Submission } from '../types/submission';
+import type { Submission } from '../types/submission';
 
 interface GradingFormProps {
   submission: Submission;

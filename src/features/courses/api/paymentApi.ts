@@ -1,5 +1,4 @@
 import { axiosInstance } from '../../../api/axiosInstance';
-import type { PaymentListResponse, InstructorEnrollmentResponse } from '../types/payment';
 
 // Get payments with filters
 export const getPayments = (params?: any) =>

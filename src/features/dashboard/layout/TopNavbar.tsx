@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import profile from "../../../assets/profile.png";
-import { ChevronDown, LogOut, User } from "lucide-react";
+import { ChevronDown, Link, LogOut, User } from "lucide-react";
 
 type NavbarLoginProps = {
   user: {
@@ -51,7 +51,7 @@ export default function TopNavbar({ user, onLogout }: NavbarLoginProps) {
                 <div className="text-xs text-gray-500">{user?.email}</div>
               </div>
             </div>
-            <a href="/dashboard/profile" className="block px-4 py-2 text-gray-700 hover:bg-primary-50 transition-colors">Profile Page</a>
+            <Link to="profile" className="block px-4 py-2 text-gray-700 hover:bg-primary-50 transition-colors">Profile Page</Link>
             <button
               className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 flex items-center gap-2"
               onClick={onLogout}
