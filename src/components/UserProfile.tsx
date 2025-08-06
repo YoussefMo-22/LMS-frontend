@@ -4,7 +4,6 @@ import { useAuth } from '../features/auth/context/AuthContext';
 
 interface UserProfileProps {
   onClose?: () => void;
-  isOpen?: boolean;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {

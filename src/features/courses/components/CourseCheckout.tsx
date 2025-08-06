@@ -43,8 +43,8 @@ export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled
     try {
       const isPaid = (finalPrice ?? price) > 0;
       const params = isPaid ? {
-        success_url: window.location.origin + 'src/features/courses/pages/enroll-success',
-        cancel_url: window.location.origin + 'src/features/courses/pages/enroll-cancel',
+      success_url: window.location.origin + '/enroll-success',
+      cancel_url: window.location.origin + '/enroll-cancel',
       } : {};
       const res = await enrollMutation.mutateAsync({ couponCode: coupon, ...params });
       if (res.data?.url) {

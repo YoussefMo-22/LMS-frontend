@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useQuizzes, useDeleteQuiz } from '../../courses/hooks/useQuiz';
 
-const AdminQuizzes: React.FC = () => {
+const AdminQuizzes = () => {
   const [filters, setFilters] = useState({
     course_id: '',
     title: '',

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAllCoupons, useCreateCoupon, useUpdateCoupon, useDeleteCoupon } from '../../courses/hooks/useCoupon';
 import type { Coupon } from '../../courses/types/coupon';
 import { Helmet } from 'react-helmet-async';

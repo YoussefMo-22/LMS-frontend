@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuizzes } from '../hooks/useQuiz';
 import { Link } from 'react-router-dom';
 

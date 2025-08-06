@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, LogOut, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface AdminTopNavbarProps {
   user?: { name?: string; email?: string; profilePicture?: string };
@@ -45,7 +46,7 @@ const AdminTopNavbar: React.FC<AdminTopNavbarProps> = ({ user, onLogout }) => {
                 <div className="text-xs text-gray-500">{user?.email}</div>
               </div>
             </div>
-            <a href="/admin/profile" className="block px-4 py-2 text-gray-700 hover:bg-primary-50 transition-colors">Profile Page</a>
+            <Link to="profile" className="block px-4 py-2 text-gray-700 hover:bg-primary-50 transition-colors">Profile Page</Link>
             <button
               className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 flex items-center gap-2"
               onClick={onLogout}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
   Users, 
@@ -23,7 +23,7 @@ const fetchUsers = async () => {
   return response.json();
 };
 
-const AdminUsers: React.FC = () => {
+const AdminUsers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');

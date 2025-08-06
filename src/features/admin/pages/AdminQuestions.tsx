@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useQuestionsByQuiz, useCreateQuestion, useUpdateQuestion, useDeleteQuestion } from '../../courses/hooks/useQuestion';

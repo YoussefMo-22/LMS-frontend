@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useQuizzes, useCreateQuiz, useUpdateQuiz, useDeleteQuiz } from '../../courses/hooks/useQuiz';
 import { useForm } from 'react-hook-form';
