@@ -14,7 +14,7 @@ const emptyCoupon: Partial<Coupon> = {
 const AdminCoupons = () => {
   const { data, isLoading, error } = useAllCoupons();
   const createCoupon = useCreateCoupon();
-  const [editingCoupon, setEditingCoupon] = useState<Partial<Coupon> | null>(null);
+  // const [editingCoupon, setEditingCoupon] = useState<Partial<Coupon> | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<Partial<Coupon>>(emptyCoupon);
   const [editId, setEditId] = useState<string | null>(null);

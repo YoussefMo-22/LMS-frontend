@@ -1,26 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { 
-  BookOpen, 
+import {  
   Users, 
-  DollarSign, 
-  TrendingUp, 
-  TrendingDown,
-  Award,
-  Clock,
   AlertCircle,
-  CheckCircle,
   BarChart3,
-  Calendar,
-  Activity,
-  Eye,
   Download,
   ArrowUpRight,
   ArrowDownRight,
   Plus,
   Video,
-  FileText,
   Star
 } from 'lucide-react';
 import { useAuth } from '../../auth/context/AuthContext';

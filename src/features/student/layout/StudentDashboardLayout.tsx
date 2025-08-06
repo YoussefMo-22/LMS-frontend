@@ -16,14 +16,7 @@ import {
   Menu,
   X,
   Search,
-  Bell,
-  Clock,
   TrendingUp,
-  Play,
-  CheckCircle,
-  AlertCircle,
-  Star,
-  Bookmark
 } from "lucide-react";
 import Cookies from "js-cookie";
 

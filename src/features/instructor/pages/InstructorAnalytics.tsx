@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
-  BarChart3, 
   TrendingUp, 
   Users, 
   DollarSign, 
   BookOpen, 
   Award,
-  Calendar,
   Download,
-  Filter,
-  Eye,
   AlertCircle,
-  CheckCircle,
-  Clock,
   Star
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';

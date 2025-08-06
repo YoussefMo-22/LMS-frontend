@@ -6,9 +6,6 @@ import type {
   CourseFilters,
   CoursesResponse,
   SingleCourseResponse,
-  CreateCourseResponse,
-  UpdateCourseResponse,
-  DeleteCourseResponse,
 } from '../types';
 
 const defaultStaleTime = 1000 * 60 * 5; // 5 minutes
@@ -20,8 +17,8 @@ export const useCourseDetails = (courseId: string) =>
     queryKey: ['course', courseId],
     queryFn: () => courseApi.getCourseDetails(courseId),
     enabled: !!courseId,
-    staleTime: defaultStaleTime,
-    gcTime: defaultGcTime,
+    // staleTime: defaultStaleTime,
+    // gcTime: defaultGcTime,
   });
 
 // ===== INSTRUCTOR HOOKS =====

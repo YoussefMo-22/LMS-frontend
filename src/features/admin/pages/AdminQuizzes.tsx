@@ -153,7 +153,7 @@ const AdminQuizzes: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Avg Time Limit</p>
                 <p className="text-2xl font-bold text-gray-900">
                   {quizzes.length > 0 
-                    ? Math.round(quizzes.reduce((sum, quiz) => sum + quiz.time_limit, 0) / quizzes.length)
+                    ? Math.round(quizzes.reduce((sum: number, quiz: any) => sum + quiz.time_limit, 0) / quizzes.length)
                     : 0} min
                 </p>
               </div>
@@ -198,7 +198,7 @@ const AdminQuizzes: React.FC = () => {
                     </td>
                   </tr>
                 ) : (
-                  quizzes.map((quiz) => (
+                  quizzes.map((quiz: any) => (
                     <tr key={quiz._id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">

@@ -20,13 +20,8 @@ import {
   Menu,
   X,
   Search,
-  Bell,
   Video,
-  Clock,
-  TrendingUp,
   DollarSign,
-  Edit3,
-  Play
 } from "lucide-react";
 import Cookies from "js-cookie";
 

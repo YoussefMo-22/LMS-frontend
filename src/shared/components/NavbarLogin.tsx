@@ -49,7 +49,7 @@ const navigateToDashboard = () => {
         <div className={`absolute top-full left-0 w-full bg-white xl:bg-transparent xl:static xl:w-auto transition-all duration-300 ease-in-out ${isOpen ? "block" : "hidden"} xl:flex xl:items-center xl:space-x-6`}>
           <ul className="flex flex-col xl:flex-row items-center text-dark-500 xl:space-x-6 space-y-4 xl:space-y-0 px-4 py-4 xl:p-0">
             <li><NavLink to="/home" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>Home</NavLink></li>
-            <li><NavLink to="/courses" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>My Courses</NavLink></li>
+            <li><NavLink to="/courses" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>Courses</NavLink></li>
             <li><NavLink to="/quiz/1" className={({ isActive }) => isActive ? "text-primary-500 font-semibold" : ""}>Assignments</NavLink></li>
           </ul>
 

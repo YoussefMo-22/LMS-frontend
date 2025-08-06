@@ -25,9 +25,9 @@ function CoursesSection() {
             {[1, 2, 3].map((_, idx) => (
               <SwiperSlide key={idx}>
                 <CourseCard
-                  id={idx + 1}
+                  id={(idx + 1).toString()}
                   title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
-                  instructor="Dr. Angela Yu"
+                  instructor={{ name: "Dr. Angela Yu", photo: "" }}
                   price={499.99}
                   originalPrice={599.99}
                   rating={4}
@@ -38,7 +38,7 @@ function CoursesSection() {
         </div>
 
         {/* Grid layout for md+ */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {/* <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <CourseCard
             id={1}
             title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
@@ -64,7 +64,7 @@ function CoursesSection() {
             rating={4}
           />
 
-        </div>
+        </div> */}
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useResetPassword } from '../hooks/useAuth';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -29,7 +29,8 @@ const ResetPasswordForm: React.FC = () => {
     try {
       const resetData: ResetPasswordRequest = {
         email: data.email,
-        newPassword: data.newPassword
+        newPassword: data.newPassword,
+        token: code
       };
       
       await resetPasswordMutation.mutateAsync({ code, data: resetData });

@@ -1,0 +1,46 @@
+{
+  "status": "success",
+  "results": 2,
+  "data": {
+    "courses": [
+      {
+        "_id": "1",
+        "title": "React for Beginners",
+        "description": "Learn React from scratch.",
+        "price": 99,
+        "duration": "10h",
+        "category": "Web Development",
+        "instructor": { "_id": "i1", "name": "Jane Doe", "email": "jane@example.com", "photo": "" },
+        "status": "published",
+        "priceAfterDiscount": 79,
+        "language": "English",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z",
+        "__v": 0
+      },
+      {
+        "_id": "2",
+        "title": "Advanced TypeScript",
+        "description": "Deep dive into TypeScript.",
+        "price": 120,
+        "duration": "8h",
+        "category": "Programming",
+        "instructor": { "_id": "i2", "name": "John Smith", "email": "john@example.com", "photo": "" },
+        "status": "published",
+        "priceAfterDiscount": 100,
+        "language": "English",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z",
+        "__v": 0
+      }
+    ]
+  },
+  "pagination": {
+    "currentPage": 1,
+    "totalPages": 1,
+    "totalItems": 2,
+    "itemsPerPage": 12,
+    "hasNextPage": false,
+    "hasPrevPage": false
+  }
+}

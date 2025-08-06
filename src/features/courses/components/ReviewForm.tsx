@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCreateReview, useUpdateReview } from '../hooks/useReview';
-import type { CreateReviewRequest, UpdateReviewRequest, Review } from '../types/review';
+import type { Review } from '../types/review';
 
 interface ReviewFormProps {
   courseId: string;

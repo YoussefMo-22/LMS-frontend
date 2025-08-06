@@ -12,7 +12,7 @@ export const useLesson = (lessonId: string) =>
 export const useLessonsByCourse = (courseId: string) =>
   useQuery<LessonListResponse, Error>({
     queryKey: ['lessonsByCourse', courseId],
-    queryFn: () => api.getLessonsByCourse(courseId),
+    queryFn: () => api.getCourseLessons(courseId),
     enabled: !!courseId,
   });
 

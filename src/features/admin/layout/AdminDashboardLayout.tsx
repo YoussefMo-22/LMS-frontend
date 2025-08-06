@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { 
   Home, 
   BookOpen, 
@@ -17,15 +17,11 @@ import {
   Menu,
   X,
   Search,
-  Bell,
   User,
   Shield,
   Database,
   Activity,
-  Calendar,
   DollarSign,
-  TrendingUp,
-  AlertCircle
 } from "lucide-react";
 import Cookies from "js-cookie";
 import { useAuth } from '../../auth/context/AuthContext';

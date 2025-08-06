@@ -7,7 +7,7 @@ export const useReviewsByCourse = (courseId: string, params?: ReviewsQueryParams
     queryKey: ['reviews', courseId, params],
     queryFn: () => reviewApi.getReviewsByCourse(courseId, params),
     enabled: !!courseId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -16,7 +16,7 @@ export const useReview = (reviewId: string) => {
     queryKey: ['review', reviewId],
     queryFn: () => reviewApi.getReview(reviewId),
     enabled: !!reviewId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -25,7 +25,7 @@ export const useCourseAverageRating = (courseId: string) => {
     queryKey: ['courseAverageRating', courseId],
     queryFn: () => reviewApi.getCourseAverageRating(courseId),
     enabled: !!courseId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 

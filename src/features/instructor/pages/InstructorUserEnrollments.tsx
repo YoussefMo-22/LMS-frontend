@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from 'react-router-dom';
 import { useUserEnrollmentsInstructor } from '../../courses/hooks/useEnrollment';
 import EnrollmentTable from '../../../shared/components/EnrollmentTable';

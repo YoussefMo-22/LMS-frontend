@@ -35,11 +35,11 @@ export default function SearchPage() {
             <h2 className="text-2xl font-bold mb-4 text-primary-500">Search Results for: <span className="text-dark-500">{query}</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredCourses.length > 0 ? (
-                    filteredCourses.map(() => (
+                    filteredCourses.map((course) => (
                         <CourseCard
-                            id={1}
+                            id={course.id.toString()}
                             title="The Complete Full-Stack Web Development Bootcamp Become a Full-Stack Web Developer ..."
-                            instructor="Dr. Angela Yu"
+                            instructor={{ name: "Dr. Angela Yu", photo: "" }}
                             price={499.99}
                             originalPrice={599.99}
                             rating={4}

@@ -8,6 +8,18 @@ export const getInstructorCourses = (params?: any) =>
 export const createInstructorCourse = (data: any) =>
   axiosInstance.post('api/v1/courses', data).then(res => res.data);
 
+// update instructor course
+export const updateInstructorCourse = (courseId: string, data: any) =>
+  axiosInstance.patch(`/courses/${courseId}`, data).then(res => res.data);
+
+// get instructor course
+export const getInstructorCourse = (courseId: string) =>
+  axiosInstance.get(`/courses/${courseId}/forinstructor`).then(res => res.data);
+
+// delete instructor course
+export const deleteInstructorCourse = (courseId: string) =>
+  axiosInstance.delete(`/courses/${courseId}`).then(res => res.data);
+
 // Assignments
 export const getAssignments = (courseId?: string) =>
   axiosInstance.get(`/assignment${courseId ? `/${courseId}/course/${courseId}` : ''}`).then(res => res.data);

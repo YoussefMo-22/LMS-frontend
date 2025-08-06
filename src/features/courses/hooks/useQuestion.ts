@@ -7,7 +7,7 @@ export const useQuestionsByQuiz = (quizId: string, params?: QuestionsQueryParams
     queryKey: ['questions', quizId, params],
     queryFn: () => questionApi.getQuestionsByQuiz(quizId, params),
     enabled: !!quizId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -16,7 +16,7 @@ export const useQuestion = (questionId: string) => {
     queryKey: ['question', questionId],
     queryFn: () => questionApi.getQuestion(questionId),
     enabled: !!questionId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/enrollmentApi';
-import type { EnrollmentResponse, EnrollmentListResponse } from '../types/enrollment';
+import type { EnrollmentListResponse } from '../types/enrollment';
 import { axiosInstance } from '../../../api/axiosInstance';
 
 export interface Enrollment {
@@ -55,6 +55,6 @@ export const useMyEnrollments = () => {
       const response = await axiosInstance.get('enrollments/my');
       return response.data;
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 }; 

@@ -23,7 +23,7 @@ export default function QuizCard({ quizId }: QuizCardProps) {
   };
 
   const handleSubmit = async () => {
-    await submitQuiz.mutateAsync({ quizId, answers });
+    await submitQuiz.mutateAsync({ quizId, answers: Object.values(answers) });
     setSubmitted(true);
   };
 

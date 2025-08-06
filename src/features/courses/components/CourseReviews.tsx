@@ -1,4 +1,3 @@
-import React from 'react';
 import ReviewsSection from './ReviewsSection';
 
 interface CourseReviewsProps {

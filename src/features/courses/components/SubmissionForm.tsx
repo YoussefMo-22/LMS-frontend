@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useCreateSubmission, useUpdateSubmission } from '../hooks/useSubmission';
-import type { CreateSubmissionRequest, UpdateSubmissionRequest, Submission } from '../types/submission';
+import type { Submission } from '../types/submission';
 
 interface SubmissionFormProps {
   assignmentId: string;

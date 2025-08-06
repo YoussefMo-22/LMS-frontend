@@ -25,7 +25,7 @@ export default function InstructorCourseEditor({ mode }: CourseEditorProps) {
   useEffect(() => {
     if (mode === 'edit' && id) {
       setLoading(true);
-      api.getCourse(id)
+      api.getInstructorCourses(id)
         .then(res => {
           const c = res.data;
           setForm({
@@ -53,9 +53,9 @@ export default function InstructorCourseEditor({ mode }: CourseEditorProps) {
     setError('');
     try {
       if (mode === 'create') {
-        await api.createCourse(form);
+        await api.createInstructorCourse(form);
       } else {
-        await api.updateCourse(id!, form);
+        await api.updateInstructorCourse(id!, form);
       }
       navigate('/instructor/courses');
     } catch (err: any) {

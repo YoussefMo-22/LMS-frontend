@@ -5,7 +5,7 @@ import EnrolledCourseCard from "../../shared/components/EnrolledCourseCard";
 import { Link } from "react-router-dom";
 import EnrolledCourse from "../../shared/components/EnrolledCourse";
 import QuizCard from "../../shared/components/QuizCard";
-import CourseCard from "../../shared/components/CourseCard";
+// import CourseCard from "../../shared/components/CourseCard";
 import { useAuth } from "../auth/context/AuthContext";
 
 function HomePage() {

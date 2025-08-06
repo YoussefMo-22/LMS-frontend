@@ -5,11 +5,11 @@ import type { PaymentListResponse, InstructorEnrollmentResponse } from '../types
 export const useAllPayments = (params?: any) =>
   useQuery<PaymentListResponse, Error>({
     queryKey: ['allPayments', params],
-    queryFn: () => api.getAllPayments(params),
+    queryFn: () => api.getPayments(params),
   });
 
 export const useInstructorEnrollments = () =>
   useQuery<InstructorEnrollmentResponse, Error>({
     queryKey: ['instructorEnrollments'],
-    queryFn: api.getInstructorEnrollments,
+    queryFn: api.getEnrollmentsForInstructor,
   }); 

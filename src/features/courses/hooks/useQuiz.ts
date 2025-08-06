@@ -6,7 +6,7 @@ export const useQuizzes = (params?: QuizzesQueryParams) => {
   return useQuery({
     queryKey: ['quizzes', params],
     queryFn: () => quizApi.getQuizzes(params),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -15,7 +15,7 @@ export const useQuiz = (id: string) => {
     queryKey: ['quiz', id],
     queryFn: () => quizApi.getQuiz(id),
     enabled: !!id,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 

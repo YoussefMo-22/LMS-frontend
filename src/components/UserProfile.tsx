@@ -7,7 +7,7 @@ interface UserProfileProps {
   isOpen?: boolean;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ onClose, isOpen = false }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
   const { user, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

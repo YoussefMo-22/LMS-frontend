@@ -5,7 +5,7 @@ export const useMyCertificates = () => {
   return useQuery({
     queryKey: ['certificates', 'me'],
     queryFn: () => certificateApi.getMyCertificates(),
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    // staleTime: 10 * 60 * 1000, // 10 minutes
   });
 };
 
@@ -14,7 +14,7 @@ export const useMyCertificateForCourse = (courseId: string) => {
     queryKey: ['certificate', courseId],
     queryFn: () => certificateApi.getMyCertificateForCourse(courseId),
     enabled: !!courseId,
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    // staleTime: 10 * 60 * 1000, // 10 minutes
   });
 };
 

@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { Home, BookOpen, Users, Settings, LogOut, ListChecks, Percent, CreditCard, BookOpenCheck, Video, DollarSign } from "lucide-react";
+import { Home, BookOpen, Settings, LogOut, ListChecks, Percent, CreditCard, BookOpenCheck, Video, DollarSign } from "lucide-react";
 
 export default function InstructorSidebar() {
   // For demo, use a placeholder userId and courseId. In a real app, these would be dynamic.

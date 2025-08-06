@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useReviewsByCourse } from '../hooks/useReview';
-import type { Review } from '../types/review';
+// import type { Review } from '../types/review';
 
 interface ReviewsListProps {
   courseId: string;

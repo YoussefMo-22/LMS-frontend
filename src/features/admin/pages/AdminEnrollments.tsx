@@ -1,4 +1,3 @@
-import React from "react";
 import { useAllEnrollmentsAdmin } from '../../courses/hooks/useEnrollment';
 import EnrollmentTable from '../../../shared/components/EnrollmentTable';
 import { Helmet } from 'react-helmet-async';

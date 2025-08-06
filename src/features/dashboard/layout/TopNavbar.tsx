@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import profile from "../../../assets/profile.png";
 import { ChevronDown, LogOut, User } from "lucide-react";
 

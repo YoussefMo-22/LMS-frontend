@@ -1,4 +1,3 @@
-import React from "react";
 import { useInstructorEnrollments } from '../../courses/hooks/usePayment';
 import { Helmet } from 'react-helmet-async';
 

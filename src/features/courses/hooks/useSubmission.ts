@@ -22,7 +22,7 @@ export const useSubmissionsByAssignment = (assignmentId: string, params?: Submis
     queryKey: ['submissions', assignmentId, params],
     queryFn: () => submissionApi.getSubmissionsByAssignment(assignmentId, params),
     enabled: !!assignmentId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -31,7 +31,7 @@ export const useSubmission = (submissionId: string) => {
     queryKey: ['submission', submissionId],
     queryFn: () => submissionApi.getSubmission(submissionId),
     enabled: !!submissionId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -40,7 +40,7 @@ export const useMySubmissionForAssignment = (assignmentId: string) => {
     queryKey: ['mySubmission', assignmentId],
     queryFn: () => submissionApi.getMySubmissionForAssignment(assignmentId),
     enabled: !!assignmentId,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 
@@ -51,7 +51,7 @@ export const useMySubmissions = () => {
       const response = await axiosInstance.get('submissions/my');
       return response.data;
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 

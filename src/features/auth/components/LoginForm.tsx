@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLogin, useVerify2FA } from '../hooks/useAuth';
 import { useAuth } from '../context/AuthContext';
-import type { LoginRequest, Verify2FARequest } from '../types/auth';
+import type { Verify2FARequest } from '../types/auth';
 
 interface LoginFormProps {
   onSuccess?: () => void;
