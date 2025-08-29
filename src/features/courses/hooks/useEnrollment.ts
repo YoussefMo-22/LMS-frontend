@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/enrollmentApi';
+import { createEnrollment } from '../api/enrollmentApi';
 import type { EnrollmentListResponse } from '../types/enrollment';
 import { axiosInstance } from '../../../api/axiosInstance';
 
@@ -17,8 +18,13 @@ export interface Enrollment {
 export const useCreateEnrollment = (courseId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ couponCode, success_url, cancel_url }: { couponCode?: string; success_url?: string; cancel_url?: string }) =>
-      api.createEnrollment(courseId, { couponCode, success_url, cancel_url }),
+    mutationFn: ({
+      couponCode,
+      success_url,
+      cancel_url
+    }: { couponCode?: string; success_url?: string; cancel_url?: string }) =>
+      createEnrollment(courseId, { couponCode, success_url, cancel_url }),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['myEnrollments'] });
     },

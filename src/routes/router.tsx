@@ -164,8 +164,8 @@ const router = createBrowserRouter([
       { path: "live", element: Load(CourseLivePage) },
       { path: "courses", element: Load(Courses) },
       { path: "search", element: Load(SearchPage) },
-      { path: "/enroll-success", element: Load(EnrollSuccess) },
-      { path: "/enroll-cancel", element: Load(EnrollCancel) },
+      { path: "enroll-success", element: Load(EnrollSuccess) },
+      { path: "enroll-cancel", element: Load(EnrollCancel) },
     ],
   },
 

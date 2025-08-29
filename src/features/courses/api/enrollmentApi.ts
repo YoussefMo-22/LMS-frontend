@@ -25,9 +25,23 @@ export const getMyEnrollments = (): Promise<EnrollmentListResponse> =>
 
 // ===== ENROLLMENT MANAGEMENT =====
 
-// Create Enrollment (Student)
-export const createEnrollment = (courseId: string, data?: { couponCode?: string; success_url?: string; cancel_url?: string }): Promise<any> =>
-  axiosInstance.post(`api/v1/enrollments/${courseId}`, data).then(res => res.data);
+export const createEnrollment = (
+  courseId: string,
+  data?: { couponCode?: string; success_url?: string; cancel_url?: string }
+): Promise<any> => {
+  // Build query string for success_url & cancel_url if provided
+  let query = '';
+  if (data?.success_url && data?.cancel_url) {
+    query = `?success_url=${encodeURIComponent(data.success_url)}&cancel_url=${encodeURIComponent(data.cancel_url)}`;
+  }
+
+  // Send only couponCode in body
+  const body = data?.couponCode ? { couponCode: data.couponCode } : {};
+
+  return axiosInstance
+    .post(`api/v1/enrollments/${courseId}${query}`, body)
+    .then(res => res.data);
+};
 
 // Cancel Enrollment (Student)
 export const cancelEnrollment = (courseId: string): Promise<any> =>

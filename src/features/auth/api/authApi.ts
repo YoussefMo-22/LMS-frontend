@@ -66,7 +66,6 @@ export const authApi = {
   },
 
   // Google OAuth
-  googleAuth: (): string => {
-    return `${axiosInstance.defaults.baseURL}api/v1/users/google`;
-  },
+  googleAuth: () =>
+  axiosInstance.get('api/v1/users/google').then(res => res.data)
 }; 

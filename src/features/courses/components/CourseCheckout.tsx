@@ -37,31 +37,40 @@ export default function CourseCheckout({ courseId, price, isEnrolled, onEnrolled
     }
   };
 
-  const handleEnroll = async () => {
-    setEnrollError('');
-    setEnrolling(true);
-    try {
-      const isPaid = (finalPrice ?? price) > 0;
-      const params = isPaid ? {
-      success_url: window.location.origin + '/enroll-success',
-      cancel_url: window.location.origin + '/enroll-cancel',
-      } : {};
-      const res = await enrollMutation.mutateAsync({ couponCode: coupon, ...params });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
-        return;
-      }
-      if (res.status === 'success') {
-        onEnrolled();
-      } else {
-        setEnrollError(res.message || 'Enrollment failed.');
-      }
-    } catch (err: any) {
-      setEnrollError(err?.response?.data?.message || 'Enrollment failed.');
-    } finally {
-      setEnrolling(false);
+const handleEnroll = async () => {
+  setEnrollError('');
+  setEnrolling(true);
+
+  try {
+    const isPaid = (finalPrice ?? price) > 0;
+    const params = isPaid
+      ? {
+          success_url: 'http://localhost:5173/enroll-success',
+          cancel_url: 'http://localhost:5173/enroll-cancel', // fixed typo from 'cencel'
+        }
+      : {};
+
+    const res = await enrollMutation.mutateAsync({
+      couponCode: coupon,
+      ...params
+    });
+
+    if (res.data?.url) {
+      window.location.href = res.data.url;
+      return;
     }
-  };
+    if (res.status === 'success') {
+      onEnrolled();
+    } else {
+      setEnrollError(res.message || 'Enrollment failed.');
+    }
+  } catch (err: any) {
+    setEnrollError(err?.response?.data?.message || 'Enrollment failed.');
+  } finally {
+    setEnrolling(false);
+  }
+};
+  // If already enrolled, show message and button to continue
 
   if (isEnrolled) {
     return (
